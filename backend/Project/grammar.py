@@ -33,6 +33,7 @@ from Instrucciones.Parametro import Parametro
 from Expresiones.Array import Array
 from Instrucciones.AccesoArray import Acceso_Array
 from Instrucciones.Asignacion_Array import Asignacion_Array
+from Instrucciones.Asignacion_Struct import Asignacion_Struct
 
 
 sys.setrecursionlimit(10000)
@@ -44,6 +45,7 @@ reservadas = {
     'String': 'RSTRING',
     'Char': 'RCHAR',
     'Bool': 'RBOOL',
+    'Nothing': 'RNOTHING',
     'println': 'RPRINTLN',
     'print': 'RPRINT',
     'log10': 'RLOG10',
@@ -75,6 +77,7 @@ reservadas = {
     'function': 'RFUNC',
     'end': 'REND',
     'return': 'RRETURN',
+    'Vector': 'RVECTOR',
 }
 
 tokens = [
@@ -83,6 +86,8 @@ tokens = [
     'P_DER',
     'C_IZQ',
     'C_DER',
+    'L_IZQ',
+    'L_DER',
     'COMA',
     'DOT',
     'MAS',
@@ -114,7 +119,9 @@ t_PUNTOCOMA = r';'
 t_P_IZQ = r'\('
 t_P_DER = r'\)'
 t_C_IZQ = r'\['
-t_C_DER = r']'
+t_C_DER= r']'
+t_L_IZQ = r'{'
+t_L_DER = r'}'
 t_COMA = r','
 t_DOT = r'\.'
 t_MAS = r'\+'
@@ -350,6 +357,8 @@ def p_RETURN(t):
 
 def p_FUNCION(t):
     '''instruccion_funcion      : RFUNC ID P_IZQ parametros P_DER TIPO tipo_dato instrucciones REND
+                                | RFUNC ID P_IZQ parametros P_DER TIPO ID instrucciones REND
+                                | RFUNC ID P_IZQ P_DER TIPO ID instrucciones REND
                                 | RFUNC ID P_IZQ P_DER TIPO tipo_dato instrucciones REND'''
     if len(t) == 10:
         t[0] = Funcion(t[2], t[4], t[8], t[7], t.lineno(1), t.lexpos(1))
@@ -389,6 +398,8 @@ def p_TIPO_DATO(t):
                                 | RSTRING
                                 | RCHAR
                                 | RBOOL
+                                | RNOTHING
+                                | RVECTOR L_IZQ tipo_dato L_DER
                                 '''
     if t[1] == "Int64":
         t[0] = Tipo.ENTERO
@@ -400,6 +411,10 @@ def p_TIPO_DATO(t):
         t[0] = Tipo.CARACTER
     elif t[1] == "Bool":
         t[0] = Tipo.BOOLEANO
+    elif t[1] == "Nothing":
+        t[0] = Tipo.NOTHING
+    elif len(t) == 5:
+        t[0] = Tipo.ARREGLO
 
 
 # ////////////////////////////////////////////  LLAMADA FUNCION ///////////////////////////////////////
@@ -442,6 +457,10 @@ def p_LISTA_PARAMETROS_STRUCT(t):
     else:
         t[0] = [t[1]]
 
+def p_ASIGNACION_STRUCT(t):
+    'instruccion_asignacion     : ID DOT ID IGUAL expresion'
+    t[0] = Asignacion_Struct(t[1], t[3], t[5], t.lineno(
+        1), t.lexpos(2))
 # ///////////////////////////////////////FOR//////////////////////////////////////////////////
 
 def p_INSTRUCCION_FOR(t):

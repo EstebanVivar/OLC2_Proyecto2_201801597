@@ -39,7 +39,7 @@ class Generator:
     # CODE
     #############
     def Header(self):
-        header = '/*----HEADER----*/\npackage main;\n\nimport (\n\t"fmt"\n)\n\n'
+        header = 'package main;\n\nimport (\n\t"fmt"\n)\n\n'
         if len(self.temporales) > 0:
             header += 'var '
             for temporal in range(len(self.temporales)):
@@ -67,7 +67,8 @@ class Generator:
             self.C3D = self.C3D + '\t' + codigo
 
     def agregarComentario(self, comment):
-        self.codigoInterno(f'/* {comment} */\n')
+        pass
+        # self.codigoInterno(f'/* {comment} */\n')
 
     def getInstance(self):
         if Generator.generator == None:

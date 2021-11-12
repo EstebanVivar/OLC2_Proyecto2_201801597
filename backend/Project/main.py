@@ -3,6 +3,7 @@
 
 from TablaSimbolos.Generator import Generator
 from TablaSimbolos.TablaSimbolos import TablaSimbolos
+from Optimizacion.Optimizador_Sintactico import parse2 as Optimizar
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from grammar import parserX
@@ -16,7 +17,7 @@ def home():
 @app.route("/Bienvenida")
 def welcome():
     return render_template('index.html')
-
+C3D=''
 @app.route("/Editor", methods=["POST","GET"])
 def compilar():
     if request.method == "POST":    
@@ -35,7 +36,13 @@ def compilar():
                 DEBUGGER=instr
                 instr.compilar(newEnv)
                 
-           
+            C3D=generator.CodigoC3D()
+            # res=Optimizar(C3D)
+            # res.Mirilla()
+            # a=res.getCode()
+            # b=res.getReporte()
+            # print(b)
+
             return  jsonify(generator.CodigoC3D())
         except Exception:
             print("**********")

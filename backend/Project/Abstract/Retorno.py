@@ -12,6 +12,7 @@ class Tipo(Enum):
     INDEFINIDO = 8
     NULO = 9
     RANGO=10
+    NOTHING=11
     RETURN = 30
     CONTINUE = 31
     BREAK = 32

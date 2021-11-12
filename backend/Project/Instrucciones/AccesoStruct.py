@@ -21,12 +21,12 @@ class AccesoStruct(Expresion):
             overStruct=True     
         else:
             var = entorno.obtenerVariable(self.identificador)
-
+        finalAttPos = 0
+        finalAtt = None
         temp = generator.agregarTemporal()
         if  overStruct:
-            struct = entorno.obtenerStruct(var.tipoAuxiliar)
-            finalAtt = None
-            finalAttPos = 0
+            struct = entorno.obtenerStruct(var.tipoAuxiliar)   
+                     
             for att in struct:              
 
                 if att.identificador == self.atributo:
@@ -40,12 +40,12 @@ class AccesoStruct(Expresion):
                 generator.agregarExpresion(tempPos, 'P', "+", var.posicion)
             
             generator.getStack(temp, tempPos)
-        
-            struct = var.tipoStruct
+            if type(var.tipo) == str:
+                struct = var.tipo
+            else:                
+                struct = var.tipoStruct
             if struct != '':
-                struct = entorno.obtenerStruct(struct)
-                finalAtt = None
-                finalAttPos = 0
+                struct = entorno.obtenerStruct(struct)                
                 for att in struct:              
 
                     if att.identificador == self.atributo:
@@ -59,6 +59,5 @@ class AccesoStruct(Expresion):
         generator.agregarExpresion(tempAux, temp, '+', finalAttPos)
         generator.getHeap(retTemp, tempAux)
         generator.agregarComentario("Fin Acceso Struct")
-        print(generator.C3D)
         return Retorno(retTemp, finalAtt.tipo, True,finalAtt.tipoStruct)
        

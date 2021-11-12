@@ -1,0 +1,3102 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> init
+Rule 1     init -> RPACKAGE ID PUNTOCOMA imports declaraciones L_codigo
+Rule 2     init -> RPACKAGE ID PUNTOCOMA declaraciones L_codigo
+Rule 3     imports -> imports import
+Rule 4     imports -> import
+Rule 5     import -> RIMPORT PARI CADENA PARD PUNTOCOMA
+Rule 6     import -> RIMPORT PARI CADENA PARD
+Rule 7     declaraciones -> declaraciones declaracion
+Rule 8     declaraciones -> declaracion
+Rule 9     declaracion -> RVAR temp_list CORI ENTERO CORD RFLOAT PUNTOCOMA
+Rule 10    declaracion -> RVAR temp_list CORI ENTERO CORD RFLOAT
+Rule 11    declaracion -> RVAR temp_list tipo PUNTOCOMA
+Rule 12    declaracion -> RVAR temp_list tipo
+Rule 13    temp_list -> temp_list COMA ID
+Rule 14    temp_list -> ID
+Rule 15    tipo -> RINT
+Rule 16    tipo -> RFLOAT
+Rule 17    L_codigo -> L_codigo codigo
+Rule 18    L_codigo -> codigo
+Rule 19    codigo -> code
+Rule 20    code -> RFUNC ID PARI PARD instrucciones
+Rule 21    instrucciones -> LLI instrucciones_2 LLD
+Rule 22    instrucciones_2 -> instrucciones_2 instruccion
+Rule 23    instrucciones_2 -> instruccion
+Rule 24    instruccion -> asignacion PUNTOCOMA
+Rule 25    instruccion -> label DPUNTOS
+Rule 26    instruccion -> gotoS PUNTOCOMA
+Rule 27    instruccion -> llamada_funcion PUNTOCOMA
+Rule 28    instruccion -> cond_if
+Rule 29    instruccion -> returnE PUNTOCOMA
+Rule 30    instruccion -> printF PUNTOCOMA
+Rule 31    label -> ID
+Rule 32    gotoS -> RGOTO ID
+Rule 33    returnE -> RRETURN
+Rule 34    printF -> RFMT PUNTO RPRINTF PARI CADENA COMA valor PARD
+Rule 35    valor -> RINT PARI expresion PARD
+Rule 36    valor -> expresion
+Rule 37    cond_if -> RIF expresion LLI RGOTO ID PUNTOCOMA LLD
+Rule 38    access -> ID CORI RINT PARI expresion PARD CORD
+Rule 39    access -> ID CORI expresion CORD
+Rule 40    asignacion -> access IGUAL expresion
+Rule 41    asignacion -> ID IGUAL expresion
+Rule 42    asignacion -> ID IGUAL access
+Rule 43    llamada_funcion -> ID PARI PARD
+Rule 44    expresion -> expresion MAS expresion
+Rule 45    expresion -> expresion MENOS expresion
+Rule 46    expresion -> expresion POR expresion
+Rule 47    expresion -> expresion DIV expresion
+Rule 48    expresion -> expresion OR expresion
+Rule 49    expresion -> expresion AND expresion
+Rule 50    expresion -> expresion IGUALDAD expresion
+Rule 51    expresion -> expresion DIFERENTE expresion
+Rule 52    expresion -> expresion MAYOR expresion
+Rule 53    expresion -> expresion MENOR expresion
+Rule 54    expresion -> expresion MAYORI expresion
+Rule 55    expresion -> expresion MENORI expresion
+Rule 56    expresion -> expresion POT expresion
+Rule 57    expresion -> expresion MOD expresion
+Rule 58    expresion -> PARI expresion PARD
+Rule 59    expresion -> ENTERO
+Rule 60    expresion -> ID
+Rule 61    expresion -> MENOS ENTERO
+Rule 62    expresion -> DECIMAL
+Rule 63    expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+Terminals, with rules where they appear
+
+AND                  : 49
+CADENA               : 5 6 34
+COMA                 : 13 34 63
+CORD                 : 9 10 38 39
+CORI                 : 9 10 38 39
+DECIMAL              : 62
+DIFERENTE            : 51
+DIV                  : 47
+DPUNTOS              : 25
+ENTERO               : 9 10 59 61
+ID                   : 1 2 13 14 20 31 32 37 38 39 41 42 43 60
+IGUAL                : 40 41 42
+IGUALDAD             : 50
+LLD                  : 21 37
+LLI                  : 21 37
+MAS                  : 44
+MAYOR                : 52
+MAYORI               : 54
+MENOR                : 53
+MENORI               : 55
+MENOS                : 45 61
+MOD                  : 57
+OR                   : 48
+PARD                 : 5 6 20 34 35 38 43 58 63
+PARI                 : 5 6 20 34 35 38 43 58 63
+POR                  : 46
+POT                  : 56
+PUNTO                : 34 63
+PUNTOCOMA            : 1 2 5 9 11 24 26 27 29 30 37
+RFLOAT               : 9 10 16
+RFMT                 : 34
+RFUNC                : 20
+RGOTO                : 32 37
+RIF                  : 37
+RIMPORT              : 5 6
+RINT                 : 15 35 38
+RMATH                : 63
+RMOD                 : 63
+RPACKAGE             : 1 2
+RPRINTF              : 34
+RRETURN              : 33
+RVAR                 : 9 10 11 12
+error                : 
+
+Nonterminals, with rules where they appear
+
+L_codigo             : 1 2 17
+access               : 40 42
+asignacion           : 24
+code                 : 19
+codigo               : 17 18
+cond_if              : 28
+declaracion          : 7 8
+declaraciones        : 1 2 7
+expresion            : 35 36 37 38 39 40 41 44 44 45 45 46 46 47 47 48 48 49 49 50 50 51 51 52 52 53 53 54 54 55 55 56 56 57 57 58 63 63
+gotoS                : 26
+import               : 3 4
+imports              : 1 3
+init                 : 0
+instruccion          : 22 23
+instrucciones        : 20
+instrucciones_2      : 21 22
+label                : 25
+llamada_funcion      : 27
+printF               : 30
+returnE              : 29
+temp_list            : 9 10 11 12 13
+tipo                 : 11 12
+valor                : 34
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . init
+    (1) init -> . RPACKAGE ID PUNTOCOMA imports declaraciones L_codigo
+    (2) init -> . RPACKAGE ID PUNTOCOMA declaraciones L_codigo
+
+    RPACKAGE        shift and go to state 2
+
+    init                           shift and go to state 1
+
+state 1
+
+    (0) S' -> init .
+
+
+
+state 2
+
+    (1) init -> RPACKAGE . ID PUNTOCOMA imports declaraciones L_codigo
+    (2) init -> RPACKAGE . ID PUNTOCOMA declaraciones L_codigo
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) init -> RPACKAGE ID . PUNTOCOMA imports declaraciones L_codigo
+    (2) init -> RPACKAGE ID . PUNTOCOMA declaraciones L_codigo
+
+    PUNTOCOMA       shift and go to state 4
+
+
+state 4
+
+    (1) init -> RPACKAGE ID PUNTOCOMA . imports declaraciones L_codigo
+    (2) init -> RPACKAGE ID PUNTOCOMA . declaraciones L_codigo
+    (3) imports -> . imports import
+    (4) imports -> . import
+    (7) declaraciones -> . declaraciones declaracion
+    (8) declaraciones -> . declaracion
+    (5) import -> . RIMPORT PARI CADENA PARD PUNTOCOMA
+    (6) import -> . RIMPORT PARI CADENA PARD
+    (9) declaracion -> . RVAR temp_list CORI ENTERO CORD RFLOAT PUNTOCOMA
+    (10) declaracion -> . RVAR temp_list CORI ENTERO CORD RFLOAT
+    (11) declaracion -> . RVAR temp_list tipo PUNTOCOMA
+    (12) declaracion -> . RVAR temp_list tipo
+
+    RIMPORT         shift and go to state 9
+    RVAR            shift and go to state 10
+
+    imports                        shift and go to state 5
+    declaraciones                  shift and go to state 6
+    import                         shift and go to state 7
+    declaracion                    shift and go to state 8
+
+state 5
+
+    (1) init -> RPACKAGE ID PUNTOCOMA imports . declaraciones L_codigo
+    (3) imports -> imports . import
+    (7) declaraciones -> . declaraciones declaracion
+    (8) declaraciones -> . declaracion
+    (5) import -> . RIMPORT PARI CADENA PARD PUNTOCOMA
+    (6) import -> . RIMPORT PARI CADENA PARD
+    (9) declaracion -> . RVAR temp_list CORI ENTERO CORD RFLOAT PUNTOCOMA
+    (10) declaracion -> . RVAR temp_list CORI ENTERO CORD RFLOAT
+    (11) declaracion -> . RVAR temp_list tipo PUNTOCOMA
+    (12) declaracion -> . RVAR temp_list tipo
+
+    RIMPORT         shift and go to state 9
+    RVAR            shift and go to state 10
+
+    declaraciones                  shift and go to state 11
+    import                         shift and go to state 12
+    declaracion                    shift and go to state 8
+
+state 6
+
+    (2) init -> RPACKAGE ID PUNTOCOMA declaraciones . L_codigo
+    (7) declaraciones -> declaraciones . declaracion
+    (17) L_codigo -> . L_codigo codigo
+    (18) L_codigo -> . codigo
+    (9) declaracion -> . RVAR temp_list CORI ENTERO CORD RFLOAT PUNTOCOMA
+    (10) declaracion -> . RVAR temp_list CORI ENTERO CORD RFLOAT
+    (11) declaracion -> . RVAR temp_list tipo PUNTOCOMA
+    (12) declaracion -> . RVAR temp_list tipo
+    (19) codigo -> . code
+    (20) code -> . RFUNC ID PARI PARD instrucciones
+
+    RVAR            shift and go to state 10
+    RFUNC           shift and go to state 17
+
+    L_codigo                       shift and go to state 13
+    declaracion                    shift and go to state 14
+    codigo                         shift and go to state 15
+    code                           shift and go to state 16
+
+state 7
+
+    (4) imports -> import .
+
+    RIMPORT         reduce using rule 4 (imports -> import .)
+    RVAR            reduce using rule 4 (imports -> import .)
+
+
+state 8
+
+    (8) declaraciones -> declaracion .
+
+    RVAR            reduce using rule 8 (declaraciones -> declaracion .)
+    RFUNC           reduce using rule 8 (declaraciones -> declaracion .)
+
+
+state 9
+
+    (5) import -> RIMPORT . PARI CADENA PARD PUNTOCOMA
+    (6) import -> RIMPORT . PARI CADENA PARD
+
+    PARI            shift and go to state 18
+
+
+state 10
+
+    (9) declaracion -> RVAR . temp_list CORI ENTERO CORD RFLOAT PUNTOCOMA
+    (10) declaracion -> RVAR . temp_list CORI ENTERO CORD RFLOAT
+    (11) declaracion -> RVAR . temp_list tipo PUNTOCOMA
+    (12) declaracion -> RVAR . temp_list tipo
+    (13) temp_list -> . temp_list COMA ID
+    (14) temp_list -> . ID
+
+    ID              shift and go to state 20
+
+    temp_list                      shift and go to state 19
+
+state 11
+
+    (1) init -> RPACKAGE ID PUNTOCOMA imports declaraciones . L_codigo
+    (7) declaraciones -> declaraciones . declaracion
+    (17) L_codigo -> . L_codigo codigo
+    (18) L_codigo -> . codigo
+    (9) declaracion -> . RVAR temp_list CORI ENTERO CORD RFLOAT PUNTOCOMA
+    (10) declaracion -> . RVAR temp_list CORI ENTERO CORD RFLOAT
+    (11) declaracion -> . RVAR temp_list tipo PUNTOCOMA
+    (12) declaracion -> . RVAR temp_list tipo
+    (19) codigo -> . code
+    (20) code -> . RFUNC ID PARI PARD instrucciones
+
+    RVAR            shift and go to state 10
+    RFUNC           shift and go to state 17
+
+    L_codigo                       shift and go to state 21
+    declaracion                    shift and go to state 14
+    codigo                         shift and go to state 15
+    code                           shift and go to state 16
+
+state 12
+
+    (3) imports -> imports import .
+
+    RIMPORT         reduce using rule 3 (imports -> imports import .)
+    RVAR            reduce using rule 3 (imports -> imports import .)
+
+
+state 13
+
+    (2) init -> RPACKAGE ID PUNTOCOMA declaraciones L_codigo .
+    (17) L_codigo -> L_codigo . codigo
+    (19) codigo -> . code
+    (20) code -> . RFUNC ID PARI PARD instrucciones
+
+    $end            reduce using rule 2 (init -> RPACKAGE ID PUNTOCOMA declaraciones L_codigo .)
+    RFUNC           shift and go to state 17
+
+    codigo                         shift and go to state 22
+    code                           shift and go to state 16
+
+state 14
+
+    (7) declaraciones -> declaraciones declaracion .
+
+    RVAR            reduce using rule 7 (declaraciones -> declaraciones declaracion .)
+    RFUNC           reduce using rule 7 (declaraciones -> declaraciones declaracion .)
+
+
+state 15
+
+    (18) L_codigo -> codigo .
+
+    RFUNC           reduce using rule 18 (L_codigo -> codigo .)
+    $end            reduce using rule 18 (L_codigo -> codigo .)
+
+
+state 16
+
+    (19) codigo -> code .
+
+    RFUNC           reduce using rule 19 (codigo -> code .)
+    $end            reduce using rule 19 (codigo -> code .)
+
+
+state 17
+
+    (20) code -> RFUNC . ID PARI PARD instrucciones
+
+    ID              shift and go to state 23
+
+
+state 18
+
+    (5) import -> RIMPORT PARI . CADENA PARD PUNTOCOMA
+    (6) import -> RIMPORT PARI . CADENA PARD
+
+    CADENA          shift and go to state 24
+
+
+state 19
+
+    (9) declaracion -> RVAR temp_list . CORI ENTERO CORD RFLOAT PUNTOCOMA
+    (10) declaracion -> RVAR temp_list . CORI ENTERO CORD RFLOAT
+    (11) declaracion -> RVAR temp_list . tipo PUNTOCOMA
+    (12) declaracion -> RVAR temp_list . tipo
+    (13) temp_list -> temp_list . COMA ID
+    (15) tipo -> . RINT
+    (16) tipo -> . RFLOAT
+
+    CORI            shift and go to state 25
+    COMA            shift and go to state 28
+    RINT            shift and go to state 29
+    RFLOAT          shift and go to state 26
+
+    tipo                           shift and go to state 27
+
+state 20
+
+    (14) temp_list -> ID .
+
+    CORI            reduce using rule 14 (temp_list -> ID .)
+    COMA            reduce using rule 14 (temp_list -> ID .)
+    RINT            reduce using rule 14 (temp_list -> ID .)
+    RFLOAT          reduce using rule 14 (temp_list -> ID .)
+
+
+state 21
+
+    (1) init -> RPACKAGE ID PUNTOCOMA imports declaraciones L_codigo .
+    (17) L_codigo -> L_codigo . codigo
+    (19) codigo -> . code
+    (20) code -> . RFUNC ID PARI PARD instrucciones
+
+    $end            reduce using rule 1 (init -> RPACKAGE ID PUNTOCOMA imports declaraciones L_codigo .)
+    RFUNC           shift and go to state 17
+
+    codigo                         shift and go to state 22
+    code                           shift and go to state 16
+
+state 22
+
+    (17) L_codigo -> L_codigo codigo .
+
+    RFUNC           reduce using rule 17 (L_codigo -> L_codigo codigo .)
+    $end            reduce using rule 17 (L_codigo -> L_codigo codigo .)
+
+
+state 23
+
+    (20) code -> RFUNC ID . PARI PARD instrucciones
+
+    PARI            shift and go to state 30
+
+
+state 24
+
+    (5) import -> RIMPORT PARI CADENA . PARD PUNTOCOMA
+    (6) import -> RIMPORT PARI CADENA . PARD
+
+    PARD            shift and go to state 31
+
+
+state 25
+
+    (9) declaracion -> RVAR temp_list CORI . ENTERO CORD RFLOAT PUNTOCOMA
+    (10) declaracion -> RVAR temp_list CORI . ENTERO CORD RFLOAT
+
+    ENTERO          shift and go to state 32
+
+
+state 26
+
+    (16) tipo -> RFLOAT .
+
+    PUNTOCOMA       reduce using rule 16 (tipo -> RFLOAT .)
+    RVAR            reduce using rule 16 (tipo -> RFLOAT .)
+    RFUNC           reduce using rule 16 (tipo -> RFLOAT .)
+
+
+state 27
+
+    (11) declaracion -> RVAR temp_list tipo . PUNTOCOMA
+    (12) declaracion -> RVAR temp_list tipo .
+
+    PUNTOCOMA       shift and go to state 33
+    RVAR            reduce using rule 12 (declaracion -> RVAR temp_list tipo .)
+    RFUNC           reduce using rule 12 (declaracion -> RVAR temp_list tipo .)
+
+
+state 28
+
+    (13) temp_list -> temp_list COMA . ID
+
+    ID              shift and go to state 34
+
+
+state 29
+
+    (15) tipo -> RINT .
+
+    PUNTOCOMA       reduce using rule 15 (tipo -> RINT .)
+    RVAR            reduce using rule 15 (tipo -> RINT .)
+    RFUNC           reduce using rule 15 (tipo -> RINT .)
+
+
+state 30
+
+    (20) code -> RFUNC ID PARI . PARD instrucciones
+
+    PARD            shift and go to state 35
+
+
+state 31
+
+    (5) import -> RIMPORT PARI CADENA PARD . PUNTOCOMA
+    (6) import -> RIMPORT PARI CADENA PARD .
+
+    PUNTOCOMA       shift and go to state 36
+    RIMPORT         reduce using rule 6 (import -> RIMPORT PARI CADENA PARD .)
+    RVAR            reduce using rule 6 (import -> RIMPORT PARI CADENA PARD .)
+
+
+state 32
+
+    (9) declaracion -> RVAR temp_list CORI ENTERO . CORD RFLOAT PUNTOCOMA
+    (10) declaracion -> RVAR temp_list CORI ENTERO . CORD RFLOAT
+
+    CORD            shift and go to state 37
+
+
+state 33
+
+    (11) declaracion -> RVAR temp_list tipo PUNTOCOMA .
+
+    RVAR            reduce using rule 11 (declaracion -> RVAR temp_list tipo PUNTOCOMA .)
+    RFUNC           reduce using rule 11 (declaracion -> RVAR temp_list tipo PUNTOCOMA .)
+
+
+state 34
+
+    (13) temp_list -> temp_list COMA ID .
+
+    CORI            reduce using rule 13 (temp_list -> temp_list COMA ID .)
+    COMA            reduce using rule 13 (temp_list -> temp_list COMA ID .)
+    RINT            reduce using rule 13 (temp_list -> temp_list COMA ID .)
+    RFLOAT          reduce using rule 13 (temp_list -> temp_list COMA ID .)
+
+
+state 35
+
+    (20) code -> RFUNC ID PARI PARD . instrucciones
+    (21) instrucciones -> . LLI instrucciones_2 LLD
+
+    LLI             shift and go to state 39
+
+    instrucciones                  shift and go to state 38
+
+state 36
+
+    (5) import -> RIMPORT PARI CADENA PARD PUNTOCOMA .
+
+    RIMPORT         reduce using rule 5 (import -> RIMPORT PARI CADENA PARD PUNTOCOMA .)
+    RVAR            reduce using rule 5 (import -> RIMPORT PARI CADENA PARD PUNTOCOMA .)
+
+
+state 37
+
+    (9) declaracion -> RVAR temp_list CORI ENTERO CORD . RFLOAT PUNTOCOMA
+    (10) declaracion -> RVAR temp_list CORI ENTERO CORD . RFLOAT
+
+    RFLOAT          shift and go to state 40
+
+
+state 38
+
+    (20) code -> RFUNC ID PARI PARD instrucciones .
+
+    RFUNC           reduce using rule 20 (code -> RFUNC ID PARI PARD instrucciones .)
+    $end            reduce using rule 20 (code -> RFUNC ID PARI PARD instrucciones .)
+
+
+state 39
+
+    (21) instrucciones -> LLI . instrucciones_2 LLD
+    (22) instrucciones_2 -> . instrucciones_2 instruccion
+    (23) instrucciones_2 -> . instruccion
+    (24) instruccion -> . asignacion PUNTOCOMA
+    (25) instruccion -> . label DPUNTOS
+    (26) instruccion -> . gotoS PUNTOCOMA
+    (27) instruccion -> . llamada_funcion PUNTOCOMA
+    (28) instruccion -> . cond_if
+    (29) instruccion -> . returnE PUNTOCOMA
+    (30) instruccion -> . printF PUNTOCOMA
+    (40) asignacion -> . access IGUAL expresion
+    (41) asignacion -> . ID IGUAL expresion
+    (42) asignacion -> . ID IGUAL access
+    (31) label -> . ID
+    (32) gotoS -> . RGOTO ID
+    (43) llamada_funcion -> . ID PARI PARD
+    (37) cond_if -> . RIF expresion LLI RGOTO ID PUNTOCOMA LLD
+    (33) returnE -> . RRETURN
+    (34) printF -> . RFMT PUNTO RPRINTF PARI CADENA COMA valor PARD
+    (38) access -> . ID CORI RINT PARI expresion PARD CORD
+    (39) access -> . ID CORI expresion CORD
+
+    ID              shift and go to state 51
+    RGOTO           shift and go to state 52
+    RIF             shift and go to state 53
+    RRETURN         shift and go to state 54
+    RFMT            shift and go to state 55
+
+    instrucciones_2                shift and go to state 41
+    instruccion                    shift and go to state 42
+    asignacion                     shift and go to state 43
+    label                          shift and go to state 44
+    gotoS                          shift and go to state 45
+    llamada_funcion                shift and go to state 46
+    cond_if                        shift and go to state 47
+    returnE                        shift and go to state 48
+    printF                         shift and go to state 49
+    access                         shift and go to state 50
+
+state 40
+
+    (9) declaracion -> RVAR temp_list CORI ENTERO CORD RFLOAT . PUNTOCOMA
+    (10) declaracion -> RVAR temp_list CORI ENTERO CORD RFLOAT .
+
+    PUNTOCOMA       shift and go to state 56
+    RVAR            reduce using rule 10 (declaracion -> RVAR temp_list CORI ENTERO CORD RFLOAT .)
+    RFUNC           reduce using rule 10 (declaracion -> RVAR temp_list CORI ENTERO CORD RFLOAT .)
+
+
+state 41
+
+    (21) instrucciones -> LLI instrucciones_2 . LLD
+    (22) instrucciones_2 -> instrucciones_2 . instruccion
+    (24) instruccion -> . asignacion PUNTOCOMA
+    (25) instruccion -> . label DPUNTOS
+    (26) instruccion -> . gotoS PUNTOCOMA
+    (27) instruccion -> . llamada_funcion PUNTOCOMA
+    (28) instruccion -> . cond_if
+    (29) instruccion -> . returnE PUNTOCOMA
+    (30) instruccion -> . printF PUNTOCOMA
+    (40) asignacion -> . access IGUAL expresion
+    (41) asignacion -> . ID IGUAL expresion
+    (42) asignacion -> . ID IGUAL access
+    (31) label -> . ID
+    (32) gotoS -> . RGOTO ID
+    (43) llamada_funcion -> . ID PARI PARD
+    (37) cond_if -> . RIF expresion LLI RGOTO ID PUNTOCOMA LLD
+    (33) returnE -> . RRETURN
+    (34) printF -> . RFMT PUNTO RPRINTF PARI CADENA COMA valor PARD
+    (38) access -> . ID CORI RINT PARI expresion PARD CORD
+    (39) access -> . ID CORI expresion CORD
+
+    LLD             shift and go to state 57
+    ID              shift and go to state 51
+    RGOTO           shift and go to state 52
+    RIF             shift and go to state 53
+    RRETURN         shift and go to state 54
+    RFMT            shift and go to state 55
+
+    instruccion                    shift and go to state 58
+    asignacion                     shift and go to state 43
+    label                          shift and go to state 44
+    gotoS                          shift and go to state 45
+    llamada_funcion                shift and go to state 46
+    cond_if                        shift and go to state 47
+    returnE                        shift and go to state 48
+    printF                         shift and go to state 49
+    access                         shift and go to state 50
+
+state 42
+
+    (23) instrucciones_2 -> instruccion .
+
+    LLD             reduce using rule 23 (instrucciones_2 -> instruccion .)
+    ID              reduce using rule 23 (instrucciones_2 -> instruccion .)
+    RGOTO           reduce using rule 23 (instrucciones_2 -> instruccion .)
+    RIF             reduce using rule 23 (instrucciones_2 -> instruccion .)
+    RRETURN         reduce using rule 23 (instrucciones_2 -> instruccion .)
+    RFMT            reduce using rule 23 (instrucciones_2 -> instruccion .)
+
+
+state 43
+
+    (24) instruccion -> asignacion . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 59
+
+
+state 44
+
+    (25) instruccion -> label . DPUNTOS
+
+    DPUNTOS         shift and go to state 60
+
+
+state 45
+
+    (26) instruccion -> gotoS . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 61
+
+
+state 46
+
+    (27) instruccion -> llamada_funcion . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 62
+
+
+state 47
+
+    (28) instruccion -> cond_if .
+
+    LLD             reduce using rule 28 (instruccion -> cond_if .)
+    ID              reduce using rule 28 (instruccion -> cond_if .)
+    RGOTO           reduce using rule 28 (instruccion -> cond_if .)
+    RIF             reduce using rule 28 (instruccion -> cond_if .)
+    RRETURN         reduce using rule 28 (instruccion -> cond_if .)
+    RFMT            reduce using rule 28 (instruccion -> cond_if .)
+
+
+state 48
+
+    (29) instruccion -> returnE . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 63
+
+
+state 49
+
+    (30) instruccion -> printF . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 64
+
+
+state 50
+
+    (40) asignacion -> access . IGUAL expresion
+
+    IGUAL           shift and go to state 65
+
+
+state 51
+
+    (41) asignacion -> ID . IGUAL expresion
+    (42) asignacion -> ID . IGUAL access
+    (31) label -> ID .
+    (43) llamada_funcion -> ID . PARI PARD
+    (38) access -> ID . CORI RINT PARI expresion PARD CORD
+    (39) access -> ID . CORI expresion CORD
+
+    IGUAL           shift and go to state 66
+    DPUNTOS         reduce using rule 31 (label -> ID .)
+    PARI            shift and go to state 67
+    CORI            shift and go to state 68
+
+
+state 52
+
+    (32) gotoS -> RGOTO . ID
+
+    ID              shift and go to state 69
+
+
+state 53
+
+    (37) cond_if -> RIF . expresion LLI RGOTO ID PUNTOCOMA LLD
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 70
+
+state 54
+
+    (33) returnE -> RRETURN .
+
+    PUNTOCOMA       reduce using rule 33 (returnE -> RRETURN .)
+
+
+state 55
+
+    (34) printF -> RFMT . PUNTO RPRINTF PARI CADENA COMA valor PARD
+
+    PUNTO           shift and go to state 77
+
+
+state 56
+
+    (9) declaracion -> RVAR temp_list CORI ENTERO CORD RFLOAT PUNTOCOMA .
+
+    RVAR            reduce using rule 9 (declaracion -> RVAR temp_list CORI ENTERO CORD RFLOAT PUNTOCOMA .)
+    RFUNC           reduce using rule 9 (declaracion -> RVAR temp_list CORI ENTERO CORD RFLOAT PUNTOCOMA .)
+
+
+state 57
+
+    (21) instrucciones -> LLI instrucciones_2 LLD .
+
+    RFUNC           reduce using rule 21 (instrucciones -> LLI instrucciones_2 LLD .)
+    $end            reduce using rule 21 (instrucciones -> LLI instrucciones_2 LLD .)
+
+
+state 58
+
+    (22) instrucciones_2 -> instrucciones_2 instruccion .
+
+    LLD             reduce using rule 22 (instrucciones_2 -> instrucciones_2 instruccion .)
+    ID              reduce using rule 22 (instrucciones_2 -> instrucciones_2 instruccion .)
+    RGOTO           reduce using rule 22 (instrucciones_2 -> instrucciones_2 instruccion .)
+    RIF             reduce using rule 22 (instrucciones_2 -> instrucciones_2 instruccion .)
+    RRETURN         reduce using rule 22 (instrucciones_2 -> instrucciones_2 instruccion .)
+    RFMT            reduce using rule 22 (instrucciones_2 -> instrucciones_2 instruccion .)
+
+
+state 59
+
+    (24) instruccion -> asignacion PUNTOCOMA .
+
+    LLD             reduce using rule 24 (instruccion -> asignacion PUNTOCOMA .)
+    ID              reduce using rule 24 (instruccion -> asignacion PUNTOCOMA .)
+    RGOTO           reduce using rule 24 (instruccion -> asignacion PUNTOCOMA .)
+    RIF             reduce using rule 24 (instruccion -> asignacion PUNTOCOMA .)
+    RRETURN         reduce using rule 24 (instruccion -> asignacion PUNTOCOMA .)
+    RFMT            reduce using rule 24 (instruccion -> asignacion PUNTOCOMA .)
+
+
+state 60
+
+    (25) instruccion -> label DPUNTOS .
+
+    LLD             reduce using rule 25 (instruccion -> label DPUNTOS .)
+    ID              reduce using rule 25 (instruccion -> label DPUNTOS .)
+    RGOTO           reduce using rule 25 (instruccion -> label DPUNTOS .)
+    RIF             reduce using rule 25 (instruccion -> label DPUNTOS .)
+    RRETURN         reduce using rule 25 (instruccion -> label DPUNTOS .)
+    RFMT            reduce using rule 25 (instruccion -> label DPUNTOS .)
+
+
+state 61
+
+    (26) instruccion -> gotoS PUNTOCOMA .
+
+    LLD             reduce using rule 26 (instruccion -> gotoS PUNTOCOMA .)
+    ID              reduce using rule 26 (instruccion -> gotoS PUNTOCOMA .)
+    RGOTO           reduce using rule 26 (instruccion -> gotoS PUNTOCOMA .)
+    RIF             reduce using rule 26 (instruccion -> gotoS PUNTOCOMA .)
+    RRETURN         reduce using rule 26 (instruccion -> gotoS PUNTOCOMA .)
+    RFMT            reduce using rule 26 (instruccion -> gotoS PUNTOCOMA .)
+
+
+state 62
+
+    (27) instruccion -> llamada_funcion PUNTOCOMA .
+
+    LLD             reduce using rule 27 (instruccion -> llamada_funcion PUNTOCOMA .)
+    ID              reduce using rule 27 (instruccion -> llamada_funcion PUNTOCOMA .)
+    RGOTO           reduce using rule 27 (instruccion -> llamada_funcion PUNTOCOMA .)
+    RIF             reduce using rule 27 (instruccion -> llamada_funcion PUNTOCOMA .)
+    RRETURN         reduce using rule 27 (instruccion -> llamada_funcion PUNTOCOMA .)
+    RFMT            reduce using rule 27 (instruccion -> llamada_funcion PUNTOCOMA .)
+
+
+state 63
+
+    (29) instruccion -> returnE PUNTOCOMA .
+
+    LLD             reduce using rule 29 (instruccion -> returnE PUNTOCOMA .)
+    ID              reduce using rule 29 (instruccion -> returnE PUNTOCOMA .)
+    RGOTO           reduce using rule 29 (instruccion -> returnE PUNTOCOMA .)
+    RIF             reduce using rule 29 (instruccion -> returnE PUNTOCOMA .)
+    RRETURN         reduce using rule 29 (instruccion -> returnE PUNTOCOMA .)
+    RFMT            reduce using rule 29 (instruccion -> returnE PUNTOCOMA .)
+
+
+state 64
+
+    (30) instruccion -> printF PUNTOCOMA .
+
+    LLD             reduce using rule 30 (instruccion -> printF PUNTOCOMA .)
+    ID              reduce using rule 30 (instruccion -> printF PUNTOCOMA .)
+    RGOTO           reduce using rule 30 (instruccion -> printF PUNTOCOMA .)
+    RIF             reduce using rule 30 (instruccion -> printF PUNTOCOMA .)
+    RRETURN         reduce using rule 30 (instruccion -> printF PUNTOCOMA .)
+    RFMT            reduce using rule 30 (instruccion -> printF PUNTOCOMA .)
+
+
+state 65
+
+    (40) asignacion -> access IGUAL . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 78
+
+state 66
+
+    (41) asignacion -> ID IGUAL . expresion
+    (42) asignacion -> ID IGUAL . access
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+    (38) access -> . ID CORI RINT PARI expresion PARD CORD
+    (39) access -> . ID CORI expresion CORD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 79
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 80
+    access                         shift and go to state 81
+
+state 67
+
+    (43) llamada_funcion -> ID PARI . PARD
+
+    PARD            shift and go to state 82
+
+
+state 68
+
+    (38) access -> ID CORI . RINT PARI expresion PARD CORD
+    (39) access -> ID CORI . expresion CORD
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    RINT            shift and go to state 83
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 84
+
+state 69
+
+    (32) gotoS -> RGOTO ID .
+
+    PUNTOCOMA       reduce using rule 32 (gotoS -> RGOTO ID .)
+
+
+state 70
+
+    (37) cond_if -> RIF expresion . LLI RGOTO ID PUNTOCOMA LLD
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             shift and go to state 85
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    OR              shift and go to state 90
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+
+state 71
+
+    (60) expresion -> ID .
+
+    LLI             reduce using rule 60 (expresion -> ID .)
+    MAS             reduce using rule 60 (expresion -> ID .)
+    MENOS           reduce using rule 60 (expresion -> ID .)
+    POR             reduce using rule 60 (expresion -> ID .)
+    DIV             reduce using rule 60 (expresion -> ID .)
+    OR              reduce using rule 60 (expresion -> ID .)
+    AND             reduce using rule 60 (expresion -> ID .)
+    IGUALDAD        reduce using rule 60 (expresion -> ID .)
+    DIFERENTE       reduce using rule 60 (expresion -> ID .)
+    MAYOR           reduce using rule 60 (expresion -> ID .)
+    MENOR           reduce using rule 60 (expresion -> ID .)
+    MAYORI          reduce using rule 60 (expresion -> ID .)
+    MENORI          reduce using rule 60 (expresion -> ID .)
+    POT             reduce using rule 60 (expresion -> ID .)
+    MOD             reduce using rule 60 (expresion -> ID .)
+    PUNTOCOMA       reduce using rule 60 (expresion -> ID .)
+    CORD            reduce using rule 60 (expresion -> ID .)
+    PARD            reduce using rule 60 (expresion -> ID .)
+    COMA            reduce using rule 60 (expresion -> ID .)
+
+
+state 72
+
+    (61) expresion -> MENOS . ENTERO
+
+    ENTERO          shift and go to state 100
+
+
+state 73
+
+    (58) expresion -> PARI . expresion PARD
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 101
+
+state 74
+
+    (59) expresion -> ENTERO .
+
+    LLI             reduce using rule 59 (expresion -> ENTERO .)
+    MAS             reduce using rule 59 (expresion -> ENTERO .)
+    MENOS           reduce using rule 59 (expresion -> ENTERO .)
+    POR             reduce using rule 59 (expresion -> ENTERO .)
+    DIV             reduce using rule 59 (expresion -> ENTERO .)
+    OR              reduce using rule 59 (expresion -> ENTERO .)
+    AND             reduce using rule 59 (expresion -> ENTERO .)
+    IGUALDAD        reduce using rule 59 (expresion -> ENTERO .)
+    DIFERENTE       reduce using rule 59 (expresion -> ENTERO .)
+    MAYOR           reduce using rule 59 (expresion -> ENTERO .)
+    MENOR           reduce using rule 59 (expresion -> ENTERO .)
+    MAYORI          reduce using rule 59 (expresion -> ENTERO .)
+    MENORI          reduce using rule 59 (expresion -> ENTERO .)
+    POT             reduce using rule 59 (expresion -> ENTERO .)
+    MOD             reduce using rule 59 (expresion -> ENTERO .)
+    PUNTOCOMA       reduce using rule 59 (expresion -> ENTERO .)
+    CORD            reduce using rule 59 (expresion -> ENTERO .)
+    PARD            reduce using rule 59 (expresion -> ENTERO .)
+    COMA            reduce using rule 59 (expresion -> ENTERO .)
+
+
+state 75
+
+    (62) expresion -> DECIMAL .
+
+    LLI             reduce using rule 62 (expresion -> DECIMAL .)
+    MAS             reduce using rule 62 (expresion -> DECIMAL .)
+    MENOS           reduce using rule 62 (expresion -> DECIMAL .)
+    POR             reduce using rule 62 (expresion -> DECIMAL .)
+    DIV             reduce using rule 62 (expresion -> DECIMAL .)
+    OR              reduce using rule 62 (expresion -> DECIMAL .)
+    AND             reduce using rule 62 (expresion -> DECIMAL .)
+    IGUALDAD        reduce using rule 62 (expresion -> DECIMAL .)
+    DIFERENTE       reduce using rule 62 (expresion -> DECIMAL .)
+    MAYOR           reduce using rule 62 (expresion -> DECIMAL .)
+    MENOR           reduce using rule 62 (expresion -> DECIMAL .)
+    MAYORI          reduce using rule 62 (expresion -> DECIMAL .)
+    MENORI          reduce using rule 62 (expresion -> DECIMAL .)
+    POT             reduce using rule 62 (expresion -> DECIMAL .)
+    MOD             reduce using rule 62 (expresion -> DECIMAL .)
+    PUNTOCOMA       reduce using rule 62 (expresion -> DECIMAL .)
+    CORD            reduce using rule 62 (expresion -> DECIMAL .)
+    PARD            reduce using rule 62 (expresion -> DECIMAL .)
+    COMA            reduce using rule 62 (expresion -> DECIMAL .)
+
+
+state 76
+
+    (63) expresion -> RMATH . PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PUNTO           shift and go to state 102
+
+
+state 77
+
+    (34) printF -> RFMT PUNTO . RPRINTF PARI CADENA COMA valor PARD
+
+    RPRINTF         shift and go to state 103
+
+
+state 78
+
+    (40) asignacion -> access IGUAL expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    PUNTOCOMA       reduce using rule 40 (asignacion -> access IGUAL expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    OR              shift and go to state 90
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+
+state 79
+
+    (60) expresion -> ID .
+    (38) access -> ID . CORI RINT PARI expresion PARD CORD
+    (39) access -> ID . CORI expresion CORD
+
+    MAS             reduce using rule 60 (expresion -> ID .)
+    MENOS           reduce using rule 60 (expresion -> ID .)
+    POR             reduce using rule 60 (expresion -> ID .)
+    DIV             reduce using rule 60 (expresion -> ID .)
+    OR              reduce using rule 60 (expresion -> ID .)
+    AND             reduce using rule 60 (expresion -> ID .)
+    IGUALDAD        reduce using rule 60 (expresion -> ID .)
+    DIFERENTE       reduce using rule 60 (expresion -> ID .)
+    MAYOR           reduce using rule 60 (expresion -> ID .)
+    MENOR           reduce using rule 60 (expresion -> ID .)
+    MAYORI          reduce using rule 60 (expresion -> ID .)
+    MENORI          reduce using rule 60 (expresion -> ID .)
+    POT             reduce using rule 60 (expresion -> ID .)
+    MOD             reduce using rule 60 (expresion -> ID .)
+    PUNTOCOMA       reduce using rule 60 (expresion -> ID .)
+    CORI            shift and go to state 68
+
+
+state 80
+
+    (41) asignacion -> ID IGUAL expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    PUNTOCOMA       reduce using rule 41 (asignacion -> ID IGUAL expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    OR              shift and go to state 90
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+
+state 81
+
+    (42) asignacion -> ID IGUAL access .
+
+    PUNTOCOMA       reduce using rule 42 (asignacion -> ID IGUAL access .)
+
+
+state 82
+
+    (43) llamada_funcion -> ID PARI PARD .
+
+    PUNTOCOMA       reduce using rule 43 (llamada_funcion -> ID PARI PARD .)
+
+
+state 83
+
+    (38) access -> ID CORI RINT . PARI expresion PARD CORD
+
+    PARI            shift and go to state 104
+
+
+state 84
+
+    (39) access -> ID CORI expresion . CORD
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    CORD            shift and go to state 105
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    OR              shift and go to state 90
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+
+state 85
+
+    (37) cond_if -> RIF expresion LLI . RGOTO ID PUNTOCOMA LLD
+
+    RGOTO           shift and go to state 106
+
+
+state 86
+
+    (44) expresion -> expresion MAS . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 107
+
+state 87
+
+    (45) expresion -> expresion MENOS . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 108
+
+state 88
+
+    (46) expresion -> expresion POR . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 109
+
+state 89
+
+    (47) expresion -> expresion DIV . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 110
+
+state 90
+
+    (48) expresion -> expresion OR . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 111
+
+state 91
+
+    (49) expresion -> expresion AND . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 112
+
+state 92
+
+    (50) expresion -> expresion IGUALDAD . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 113
+
+state 93
+
+    (51) expresion -> expresion DIFERENTE . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 114
+
+state 94
+
+    (52) expresion -> expresion MAYOR . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 115
+
+state 95
+
+    (53) expresion -> expresion MENOR . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 116
+
+state 96
+
+    (54) expresion -> expresion MAYORI . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 117
+
+state 97
+
+    (55) expresion -> expresion MENORI . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 118
+
+state 98
+
+    (56) expresion -> expresion POT . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 119
+
+state 99
+
+    (57) expresion -> expresion MOD . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 120
+
+state 100
+
+    (61) expresion -> MENOS ENTERO .
+
+    LLI             reduce using rule 61 (expresion -> MENOS ENTERO .)
+    MAS             reduce using rule 61 (expresion -> MENOS ENTERO .)
+    MENOS           reduce using rule 61 (expresion -> MENOS ENTERO .)
+    POR             reduce using rule 61 (expresion -> MENOS ENTERO .)
+    DIV             reduce using rule 61 (expresion -> MENOS ENTERO .)
+    OR              reduce using rule 61 (expresion -> MENOS ENTERO .)
+    AND             reduce using rule 61 (expresion -> MENOS ENTERO .)
+    IGUALDAD        reduce using rule 61 (expresion -> MENOS ENTERO .)
+    DIFERENTE       reduce using rule 61 (expresion -> MENOS ENTERO .)
+    MAYOR           reduce using rule 61 (expresion -> MENOS ENTERO .)
+    MENOR           reduce using rule 61 (expresion -> MENOS ENTERO .)
+    MAYORI          reduce using rule 61 (expresion -> MENOS ENTERO .)
+    MENORI          reduce using rule 61 (expresion -> MENOS ENTERO .)
+    POT             reduce using rule 61 (expresion -> MENOS ENTERO .)
+    MOD             reduce using rule 61 (expresion -> MENOS ENTERO .)
+    PUNTOCOMA       reduce using rule 61 (expresion -> MENOS ENTERO .)
+    CORD            reduce using rule 61 (expresion -> MENOS ENTERO .)
+    PARD            reduce using rule 61 (expresion -> MENOS ENTERO .)
+    COMA            reduce using rule 61 (expresion -> MENOS ENTERO .)
+
+
+state 101
+
+    (58) expresion -> PARI expresion . PARD
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    PARD            shift and go to state 121
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    OR              shift and go to state 90
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+
+state 102
+
+    (63) expresion -> RMATH PUNTO . RMOD PARI expresion COMA expresion PARD
+
+    RMOD            shift and go to state 122
+
+
+state 103
+
+    (34) printF -> RFMT PUNTO RPRINTF . PARI CADENA COMA valor PARD
+
+    PARI            shift and go to state 123
+
+
+state 104
+
+    (38) access -> ID CORI RINT PARI . expresion PARD CORD
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 124
+
+state 105
+
+    (39) access -> ID CORI expresion CORD .
+
+    IGUAL           reduce using rule 39 (access -> ID CORI expresion CORD .)
+    PUNTOCOMA       reduce using rule 39 (access -> ID CORI expresion CORD .)
+
+
+state 106
+
+    (37) cond_if -> RIF expresion LLI RGOTO . ID PUNTOCOMA LLD
+
+    ID              shift and go to state 125
+
+
+state 107
+
+    (44) expresion -> expresion MAS expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 44 (expresion -> expresion MAS expresion .)
+    MAS             reduce using rule 44 (expresion -> expresion MAS expresion .)
+    MENOS           reduce using rule 44 (expresion -> expresion MAS expresion .)
+    OR              reduce using rule 44 (expresion -> expresion MAS expresion .)
+    AND             reduce using rule 44 (expresion -> expresion MAS expresion .)
+    IGUALDAD        reduce using rule 44 (expresion -> expresion MAS expresion .)
+    DIFERENTE       reduce using rule 44 (expresion -> expresion MAS expresion .)
+    MAYOR           reduce using rule 44 (expresion -> expresion MAS expresion .)
+    MENOR           reduce using rule 44 (expresion -> expresion MAS expresion .)
+    MAYORI          reduce using rule 44 (expresion -> expresion MAS expresion .)
+    MENORI          reduce using rule 44 (expresion -> expresion MAS expresion .)
+    PUNTOCOMA       reduce using rule 44 (expresion -> expresion MAS expresion .)
+    CORD            reduce using rule 44 (expresion -> expresion MAS expresion .)
+    PARD            reduce using rule 44 (expresion -> expresion MAS expresion .)
+    COMA            reduce using rule 44 (expresion -> expresion MAS expresion .)
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+  ! POR             [ reduce using rule 44 (expresion -> expresion MAS expresion .) ]
+  ! DIV             [ reduce using rule 44 (expresion -> expresion MAS expresion .) ]
+  ! POT             [ reduce using rule 44 (expresion -> expresion MAS expresion .) ]
+  ! MOD             [ reduce using rule 44 (expresion -> expresion MAS expresion .) ]
+  ! MAS             [ shift and go to state 86 ]
+  ! MENOS           [ shift and go to state 87 ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+  ! MAYOR           [ shift and go to state 94 ]
+  ! MENOR           [ shift and go to state 95 ]
+  ! MAYORI          [ shift and go to state 96 ]
+  ! MENORI          [ shift and go to state 97 ]
+
+
+state 108
+
+    (45) expresion -> expresion MENOS expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    MAS             reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    MENOS           reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    OR              reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    AND             reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    IGUALDAD        reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    DIFERENTE       reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    MAYOR           reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    MENOR           reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    MAYORI          reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    MENORI          reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    PUNTOCOMA       reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    CORD            reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    PARD            reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    COMA            reduce using rule 45 (expresion -> expresion MENOS expresion .)
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+  ! POR             [ reduce using rule 45 (expresion -> expresion MENOS expresion .) ]
+  ! DIV             [ reduce using rule 45 (expresion -> expresion MENOS expresion .) ]
+  ! POT             [ reduce using rule 45 (expresion -> expresion MENOS expresion .) ]
+  ! MOD             [ reduce using rule 45 (expresion -> expresion MENOS expresion .) ]
+  ! MAS             [ shift and go to state 86 ]
+  ! MENOS           [ shift and go to state 87 ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+  ! MAYOR           [ shift and go to state 94 ]
+  ! MENOR           [ shift and go to state 95 ]
+  ! MAYORI          [ shift and go to state 96 ]
+  ! MENORI          [ shift and go to state 97 ]
+
+
+state 109
+
+    (46) expresion -> expresion POR expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 46 (expresion -> expresion POR expresion .)
+    MAS             reduce using rule 46 (expresion -> expresion POR expresion .)
+    MENOS           reduce using rule 46 (expresion -> expresion POR expresion .)
+    POR             reduce using rule 46 (expresion -> expresion POR expresion .)
+    DIV             reduce using rule 46 (expresion -> expresion POR expresion .)
+    OR              reduce using rule 46 (expresion -> expresion POR expresion .)
+    AND             reduce using rule 46 (expresion -> expresion POR expresion .)
+    IGUALDAD        reduce using rule 46 (expresion -> expresion POR expresion .)
+    DIFERENTE       reduce using rule 46 (expresion -> expresion POR expresion .)
+    MAYOR           reduce using rule 46 (expresion -> expresion POR expresion .)
+    MENOR           reduce using rule 46 (expresion -> expresion POR expresion .)
+    MAYORI          reduce using rule 46 (expresion -> expresion POR expresion .)
+    MENORI          reduce using rule 46 (expresion -> expresion POR expresion .)
+    MOD             reduce using rule 46 (expresion -> expresion POR expresion .)
+    PUNTOCOMA       reduce using rule 46 (expresion -> expresion POR expresion .)
+    CORD            reduce using rule 46 (expresion -> expresion POR expresion .)
+    PARD            reduce using rule 46 (expresion -> expresion POR expresion .)
+    COMA            reduce using rule 46 (expresion -> expresion POR expresion .)
+    POT             shift and go to state 98
+
+  ! POT             [ reduce using rule 46 (expresion -> expresion POR expresion .) ]
+  ! MAS             [ shift and go to state 86 ]
+  ! MENOS           [ shift and go to state 87 ]
+  ! POR             [ shift and go to state 88 ]
+  ! DIV             [ shift and go to state 89 ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+  ! MAYOR           [ shift and go to state 94 ]
+  ! MENOR           [ shift and go to state 95 ]
+  ! MAYORI          [ shift and go to state 96 ]
+  ! MENORI          [ shift and go to state 97 ]
+  ! MOD             [ shift and go to state 99 ]
+
+
+state 110
+
+    (47) expresion -> expresion DIV expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 47 (expresion -> expresion DIV expresion .)
+    MAS             reduce using rule 47 (expresion -> expresion DIV expresion .)
+    MENOS           reduce using rule 47 (expresion -> expresion DIV expresion .)
+    POR             reduce using rule 47 (expresion -> expresion DIV expresion .)
+    DIV             reduce using rule 47 (expresion -> expresion DIV expresion .)
+    OR              reduce using rule 47 (expresion -> expresion DIV expresion .)
+    AND             reduce using rule 47 (expresion -> expresion DIV expresion .)
+    IGUALDAD        reduce using rule 47 (expresion -> expresion DIV expresion .)
+    DIFERENTE       reduce using rule 47 (expresion -> expresion DIV expresion .)
+    MAYOR           reduce using rule 47 (expresion -> expresion DIV expresion .)
+    MENOR           reduce using rule 47 (expresion -> expresion DIV expresion .)
+    MAYORI          reduce using rule 47 (expresion -> expresion DIV expresion .)
+    MENORI          reduce using rule 47 (expresion -> expresion DIV expresion .)
+    MOD             reduce using rule 47 (expresion -> expresion DIV expresion .)
+    PUNTOCOMA       reduce using rule 47 (expresion -> expresion DIV expresion .)
+    CORD            reduce using rule 47 (expresion -> expresion DIV expresion .)
+    PARD            reduce using rule 47 (expresion -> expresion DIV expresion .)
+    COMA            reduce using rule 47 (expresion -> expresion DIV expresion .)
+    POT             shift and go to state 98
+
+  ! POT             [ reduce using rule 47 (expresion -> expresion DIV expresion .) ]
+  ! MAS             [ shift and go to state 86 ]
+  ! MENOS           [ shift and go to state 87 ]
+  ! POR             [ shift and go to state 88 ]
+  ! DIV             [ shift and go to state 89 ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+  ! MAYOR           [ shift and go to state 94 ]
+  ! MENOR           [ shift and go to state 95 ]
+  ! MAYORI          [ shift and go to state 96 ]
+  ! MENORI          [ shift and go to state 97 ]
+  ! MOD             [ shift and go to state 99 ]
+
+
+state 111
+
+    (48) expresion -> expresion OR expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 48 (expresion -> expresion OR expresion .)
+    OR              reduce using rule 48 (expresion -> expresion OR expresion .)
+    PUNTOCOMA       reduce using rule 48 (expresion -> expresion OR expresion .)
+    CORD            reduce using rule 48 (expresion -> expresion OR expresion .)
+    PARD            reduce using rule 48 (expresion -> expresion OR expresion .)
+    COMA            reduce using rule 48 (expresion -> expresion OR expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+  ! MAS             [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! MENOS           [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! POR             [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! DIV             [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! AND             [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! IGUALDAD        [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! DIFERENTE       [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! MAYOR           [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! MENOR           [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! MAYORI          [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! MENORI          [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! POT             [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! MOD             [ reduce using rule 48 (expresion -> expresion OR expresion .) ]
+  ! OR              [ shift and go to state 90 ]
+
+
+state 112
+
+    (49) expresion -> expresion AND expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 49 (expresion -> expresion AND expresion .)
+    OR              reduce using rule 49 (expresion -> expresion AND expresion .)
+    AND             reduce using rule 49 (expresion -> expresion AND expresion .)
+    PUNTOCOMA       reduce using rule 49 (expresion -> expresion AND expresion .)
+    CORD            reduce using rule 49 (expresion -> expresion AND expresion .)
+    PARD            reduce using rule 49 (expresion -> expresion AND expresion .)
+    COMA            reduce using rule 49 (expresion -> expresion AND expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+  ! MAS             [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! MENOS           [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! POR             [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! DIV             [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! IGUALDAD        [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! DIFERENTE       [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! MAYOR           [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! MENOR           [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! MAYORI          [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! MENORI          [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! POT             [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! MOD             [ reduce using rule 49 (expresion -> expresion AND expresion .) ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+
+
+state 113
+
+    (50) expresion -> expresion IGUALDAD expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 50 (expresion -> expresion IGUALDAD expresion .)
+    OR              reduce using rule 50 (expresion -> expresion IGUALDAD expresion .)
+    AND             reduce using rule 50 (expresion -> expresion IGUALDAD expresion .)
+    IGUALDAD        reduce using rule 50 (expresion -> expresion IGUALDAD expresion .)
+    DIFERENTE       reduce using rule 50 (expresion -> expresion IGUALDAD expresion .)
+    PUNTOCOMA       reduce using rule 50 (expresion -> expresion IGUALDAD expresion .)
+    CORD            reduce using rule 50 (expresion -> expresion IGUALDAD expresion .)
+    PARD            reduce using rule 50 (expresion -> expresion IGUALDAD expresion .)
+    COMA            reduce using rule 50 (expresion -> expresion IGUALDAD expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+  ! MAS             [ reduce using rule 50 (expresion -> expresion IGUALDAD expresion .) ]
+  ! MENOS           [ reduce using rule 50 (expresion -> expresion IGUALDAD expresion .) ]
+  ! POR             [ reduce using rule 50 (expresion -> expresion IGUALDAD expresion .) ]
+  ! DIV             [ reduce using rule 50 (expresion -> expresion IGUALDAD expresion .) ]
+  ! MAYOR           [ reduce using rule 50 (expresion -> expresion IGUALDAD expresion .) ]
+  ! MENOR           [ reduce using rule 50 (expresion -> expresion IGUALDAD expresion .) ]
+  ! MAYORI          [ reduce using rule 50 (expresion -> expresion IGUALDAD expresion .) ]
+  ! MENORI          [ reduce using rule 50 (expresion -> expresion IGUALDAD expresion .) ]
+  ! POT             [ reduce using rule 50 (expresion -> expresion IGUALDAD expresion .) ]
+  ! MOD             [ reduce using rule 50 (expresion -> expresion IGUALDAD expresion .) ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+
+
+state 114
+
+    (51) expresion -> expresion DIFERENTE expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 51 (expresion -> expresion DIFERENTE expresion .)
+    OR              reduce using rule 51 (expresion -> expresion DIFERENTE expresion .)
+    AND             reduce using rule 51 (expresion -> expresion DIFERENTE expresion .)
+    IGUALDAD        reduce using rule 51 (expresion -> expresion DIFERENTE expresion .)
+    DIFERENTE       reduce using rule 51 (expresion -> expresion DIFERENTE expresion .)
+    PUNTOCOMA       reduce using rule 51 (expresion -> expresion DIFERENTE expresion .)
+    CORD            reduce using rule 51 (expresion -> expresion DIFERENTE expresion .)
+    PARD            reduce using rule 51 (expresion -> expresion DIFERENTE expresion .)
+    COMA            reduce using rule 51 (expresion -> expresion DIFERENTE expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+  ! MAS             [ reduce using rule 51 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MENOS           [ reduce using rule 51 (expresion -> expresion DIFERENTE expresion .) ]
+  ! POR             [ reduce using rule 51 (expresion -> expresion DIFERENTE expresion .) ]
+  ! DIV             [ reduce using rule 51 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MAYOR           [ reduce using rule 51 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MENOR           [ reduce using rule 51 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MAYORI          [ reduce using rule 51 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MENORI          [ reduce using rule 51 (expresion -> expresion DIFERENTE expresion .) ]
+  ! POT             [ reduce using rule 51 (expresion -> expresion DIFERENTE expresion .) ]
+  ! MOD             [ reduce using rule 51 (expresion -> expresion DIFERENTE expresion .) ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+
+
+state 115
+
+    (52) expresion -> expresion MAYOR expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    OR              reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    AND             reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    IGUALDAD        reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    DIFERENTE       reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    MAYOR           reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    MENOR           reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    MAYORI          reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    MENORI          reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    PUNTOCOMA       reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    CORD            reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    PARD            reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    COMA            reduce using rule 52 (expresion -> expresion MAYOR expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+  ! MAS             [ reduce using rule 52 (expresion -> expresion MAYOR expresion .) ]
+  ! MENOS           [ reduce using rule 52 (expresion -> expresion MAYOR expresion .) ]
+  ! POR             [ reduce using rule 52 (expresion -> expresion MAYOR expresion .) ]
+  ! DIV             [ reduce using rule 52 (expresion -> expresion MAYOR expresion .) ]
+  ! POT             [ reduce using rule 52 (expresion -> expresion MAYOR expresion .) ]
+  ! MOD             [ reduce using rule 52 (expresion -> expresion MAYOR expresion .) ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+  ! MAYOR           [ shift and go to state 94 ]
+  ! MENOR           [ shift and go to state 95 ]
+  ! MAYORI          [ shift and go to state 96 ]
+  ! MENORI          [ shift and go to state 97 ]
+
+
+state 116
+
+    (53) expresion -> expresion MENOR expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    OR              reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    AND             reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    IGUALDAD        reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    DIFERENTE       reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    MAYOR           reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    MENOR           reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    MAYORI          reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    MENORI          reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    PUNTOCOMA       reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    CORD            reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    PARD            reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    COMA            reduce using rule 53 (expresion -> expresion MENOR expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+  ! MAS             [ reduce using rule 53 (expresion -> expresion MENOR expresion .) ]
+  ! MENOS           [ reduce using rule 53 (expresion -> expresion MENOR expresion .) ]
+  ! POR             [ reduce using rule 53 (expresion -> expresion MENOR expresion .) ]
+  ! DIV             [ reduce using rule 53 (expresion -> expresion MENOR expresion .) ]
+  ! POT             [ reduce using rule 53 (expresion -> expresion MENOR expresion .) ]
+  ! MOD             [ reduce using rule 53 (expresion -> expresion MENOR expresion .) ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+  ! MAYOR           [ shift and go to state 94 ]
+  ! MENOR           [ shift and go to state 95 ]
+  ! MAYORI          [ shift and go to state 96 ]
+  ! MENORI          [ shift and go to state 97 ]
+
+
+state 117
+
+    (54) expresion -> expresion MAYORI expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    OR              reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    AND             reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    IGUALDAD        reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    DIFERENTE       reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    MAYOR           reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    MENOR           reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    MAYORI          reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    MENORI          reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    PUNTOCOMA       reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    CORD            reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    PARD            reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    COMA            reduce using rule 54 (expresion -> expresion MAYORI expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+  ! MAS             [ reduce using rule 54 (expresion -> expresion MAYORI expresion .) ]
+  ! MENOS           [ reduce using rule 54 (expresion -> expresion MAYORI expresion .) ]
+  ! POR             [ reduce using rule 54 (expresion -> expresion MAYORI expresion .) ]
+  ! DIV             [ reduce using rule 54 (expresion -> expresion MAYORI expresion .) ]
+  ! POT             [ reduce using rule 54 (expresion -> expresion MAYORI expresion .) ]
+  ! MOD             [ reduce using rule 54 (expresion -> expresion MAYORI expresion .) ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+  ! MAYOR           [ shift and go to state 94 ]
+  ! MENOR           [ shift and go to state 95 ]
+  ! MAYORI          [ shift and go to state 96 ]
+  ! MENORI          [ shift and go to state 97 ]
+
+
+state 118
+
+    (55) expresion -> expresion MENORI expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    OR              reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    AND             reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    IGUALDAD        reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    DIFERENTE       reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    MAYOR           reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    MENOR           reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    MAYORI          reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    MENORI          reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    PUNTOCOMA       reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    CORD            reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    PARD            reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    COMA            reduce using rule 55 (expresion -> expresion MENORI expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+  ! MAS             [ reduce using rule 55 (expresion -> expresion MENORI expresion .) ]
+  ! MENOS           [ reduce using rule 55 (expresion -> expresion MENORI expresion .) ]
+  ! POR             [ reduce using rule 55 (expresion -> expresion MENORI expresion .) ]
+  ! DIV             [ reduce using rule 55 (expresion -> expresion MENORI expresion .) ]
+  ! POT             [ reduce using rule 55 (expresion -> expresion MENORI expresion .) ]
+  ! MOD             [ reduce using rule 55 (expresion -> expresion MENORI expresion .) ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+  ! MAYOR           [ shift and go to state 94 ]
+  ! MENOR           [ shift and go to state 95 ]
+  ! MAYORI          [ shift and go to state 96 ]
+  ! MENORI          [ shift and go to state 97 ]
+
+
+state 119
+
+    (56) expresion -> expresion POT expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 56 (expresion -> expresion POT expresion .)
+    MAS             reduce using rule 56 (expresion -> expresion POT expresion .)
+    MENOS           reduce using rule 56 (expresion -> expresion POT expresion .)
+    POR             reduce using rule 56 (expresion -> expresion POT expresion .)
+    DIV             reduce using rule 56 (expresion -> expresion POT expresion .)
+    OR              reduce using rule 56 (expresion -> expresion POT expresion .)
+    AND             reduce using rule 56 (expresion -> expresion POT expresion .)
+    IGUALDAD        reduce using rule 56 (expresion -> expresion POT expresion .)
+    DIFERENTE       reduce using rule 56 (expresion -> expresion POT expresion .)
+    MAYOR           reduce using rule 56 (expresion -> expresion POT expresion .)
+    MENOR           reduce using rule 56 (expresion -> expresion POT expresion .)
+    MAYORI          reduce using rule 56 (expresion -> expresion POT expresion .)
+    MENORI          reduce using rule 56 (expresion -> expresion POT expresion .)
+    POT             reduce using rule 56 (expresion -> expresion POT expresion .)
+    MOD             reduce using rule 56 (expresion -> expresion POT expresion .)
+    PUNTOCOMA       reduce using rule 56 (expresion -> expresion POT expresion .)
+    CORD            reduce using rule 56 (expresion -> expresion POT expresion .)
+    PARD            reduce using rule 56 (expresion -> expresion POT expresion .)
+    COMA            reduce using rule 56 (expresion -> expresion POT expresion .)
+
+  ! MAS             [ shift and go to state 86 ]
+  ! MENOS           [ shift and go to state 87 ]
+  ! POR             [ shift and go to state 88 ]
+  ! DIV             [ shift and go to state 89 ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+  ! MAYOR           [ shift and go to state 94 ]
+  ! MENOR           [ shift and go to state 95 ]
+  ! MAYORI          [ shift and go to state 96 ]
+  ! MENORI          [ shift and go to state 97 ]
+  ! POT             [ shift and go to state 98 ]
+  ! MOD             [ shift and go to state 99 ]
+
+
+state 120
+
+    (57) expresion -> expresion MOD expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    LLI             reduce using rule 57 (expresion -> expresion MOD expresion .)
+    MAS             reduce using rule 57 (expresion -> expresion MOD expresion .)
+    MENOS           reduce using rule 57 (expresion -> expresion MOD expresion .)
+    POR             reduce using rule 57 (expresion -> expresion MOD expresion .)
+    DIV             reduce using rule 57 (expresion -> expresion MOD expresion .)
+    OR              reduce using rule 57 (expresion -> expresion MOD expresion .)
+    AND             reduce using rule 57 (expresion -> expresion MOD expresion .)
+    IGUALDAD        reduce using rule 57 (expresion -> expresion MOD expresion .)
+    DIFERENTE       reduce using rule 57 (expresion -> expresion MOD expresion .)
+    MAYOR           reduce using rule 57 (expresion -> expresion MOD expresion .)
+    MENOR           reduce using rule 57 (expresion -> expresion MOD expresion .)
+    MAYORI          reduce using rule 57 (expresion -> expresion MOD expresion .)
+    MENORI          reduce using rule 57 (expresion -> expresion MOD expresion .)
+    MOD             reduce using rule 57 (expresion -> expresion MOD expresion .)
+    PUNTOCOMA       reduce using rule 57 (expresion -> expresion MOD expresion .)
+    CORD            reduce using rule 57 (expresion -> expresion MOD expresion .)
+    PARD            reduce using rule 57 (expresion -> expresion MOD expresion .)
+    COMA            reduce using rule 57 (expresion -> expresion MOD expresion .)
+    POT             shift and go to state 98
+
+  ! POT             [ reduce using rule 57 (expresion -> expresion MOD expresion .) ]
+  ! MAS             [ shift and go to state 86 ]
+  ! MENOS           [ shift and go to state 87 ]
+  ! POR             [ shift and go to state 88 ]
+  ! DIV             [ shift and go to state 89 ]
+  ! OR              [ shift and go to state 90 ]
+  ! AND             [ shift and go to state 91 ]
+  ! IGUALDAD        [ shift and go to state 92 ]
+  ! DIFERENTE       [ shift and go to state 93 ]
+  ! MAYOR           [ shift and go to state 94 ]
+  ! MENOR           [ shift and go to state 95 ]
+  ! MAYORI          [ shift and go to state 96 ]
+  ! MENORI          [ shift and go to state 97 ]
+  ! MOD             [ shift and go to state 99 ]
+
+
+state 121
+
+    (58) expresion -> PARI expresion PARD .
+
+    LLI             reduce using rule 58 (expresion -> PARI expresion PARD .)
+    MAS             reduce using rule 58 (expresion -> PARI expresion PARD .)
+    MENOS           reduce using rule 58 (expresion -> PARI expresion PARD .)
+    POR             reduce using rule 58 (expresion -> PARI expresion PARD .)
+    DIV             reduce using rule 58 (expresion -> PARI expresion PARD .)
+    OR              reduce using rule 58 (expresion -> PARI expresion PARD .)
+    AND             reduce using rule 58 (expresion -> PARI expresion PARD .)
+    IGUALDAD        reduce using rule 58 (expresion -> PARI expresion PARD .)
+    DIFERENTE       reduce using rule 58 (expresion -> PARI expresion PARD .)
+    MAYOR           reduce using rule 58 (expresion -> PARI expresion PARD .)
+    MENOR           reduce using rule 58 (expresion -> PARI expresion PARD .)
+    MAYORI          reduce using rule 58 (expresion -> PARI expresion PARD .)
+    MENORI          reduce using rule 58 (expresion -> PARI expresion PARD .)
+    POT             reduce using rule 58 (expresion -> PARI expresion PARD .)
+    MOD             reduce using rule 58 (expresion -> PARI expresion PARD .)
+    PUNTOCOMA       reduce using rule 58 (expresion -> PARI expresion PARD .)
+    CORD            reduce using rule 58 (expresion -> PARI expresion PARD .)
+    PARD            reduce using rule 58 (expresion -> PARI expresion PARD .)
+    COMA            reduce using rule 58 (expresion -> PARI expresion PARD .)
+
+
+state 122
+
+    (63) expresion -> RMATH PUNTO RMOD . PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 126
+
+
+state 123
+
+    (34) printF -> RFMT PUNTO RPRINTF PARI . CADENA COMA valor PARD
+
+    CADENA          shift and go to state 127
+
+
+state 124
+
+    (38) access -> ID CORI RINT PARI expresion . PARD CORD
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    PARD            shift and go to state 128
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    OR              shift and go to state 90
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+
+state 125
+
+    (37) cond_if -> RIF expresion LLI RGOTO ID . PUNTOCOMA LLD
+
+    PUNTOCOMA       shift and go to state 129
+
+
+state 126
+
+    (63) expresion -> RMATH PUNTO RMOD PARI . expresion COMA expresion PARD
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 130
+
+state 127
+
+    (34) printF -> RFMT PUNTO RPRINTF PARI CADENA . COMA valor PARD
+
+    COMA            shift and go to state 131
+
+
+state 128
+
+    (38) access -> ID CORI RINT PARI expresion PARD . CORD
+
+    CORD            shift and go to state 132
+
+
+state 129
+
+    (37) cond_if -> RIF expresion LLI RGOTO ID PUNTOCOMA . LLD
+
+    LLD             shift and go to state 133
+
+
+state 130
+
+    (63) expresion -> RMATH PUNTO RMOD PARI expresion . COMA expresion PARD
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    COMA            shift and go to state 134
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    OR              shift and go to state 90
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+
+state 131
+
+    (34) printF -> RFMT PUNTO RPRINTF PARI CADENA COMA . valor PARD
+    (35) valor -> . RINT PARI expresion PARD
+    (36) valor -> . expresion
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    RINT            shift and go to state 136
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    valor                          shift and go to state 135
+    expresion                      shift and go to state 137
+
+state 132
+
+    (38) access -> ID CORI RINT PARI expresion PARD CORD .
+
+    IGUAL           reduce using rule 38 (access -> ID CORI RINT PARI expresion PARD CORD .)
+    PUNTOCOMA       reduce using rule 38 (access -> ID CORI RINT PARI expresion PARD CORD .)
+
+
+state 133
+
+    (37) cond_if -> RIF expresion LLI RGOTO ID PUNTOCOMA LLD .
+
+    LLD             reduce using rule 37 (cond_if -> RIF expresion LLI RGOTO ID PUNTOCOMA LLD .)
+    ID              reduce using rule 37 (cond_if -> RIF expresion LLI RGOTO ID PUNTOCOMA LLD .)
+    RGOTO           reduce using rule 37 (cond_if -> RIF expresion LLI RGOTO ID PUNTOCOMA LLD .)
+    RIF             reduce using rule 37 (cond_if -> RIF expresion LLI RGOTO ID PUNTOCOMA LLD .)
+    RRETURN         reduce using rule 37 (cond_if -> RIF expresion LLI RGOTO ID PUNTOCOMA LLD .)
+    RFMT            reduce using rule 37 (cond_if -> RIF expresion LLI RGOTO ID PUNTOCOMA LLD .)
+
+
+state 134
+
+    (63) expresion -> RMATH PUNTO RMOD PARI expresion COMA . expresion PARD
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 138
+
+state 135
+
+    (34) printF -> RFMT PUNTO RPRINTF PARI CADENA COMA valor . PARD
+
+    PARD            shift and go to state 139
+
+
+state 136
+
+    (35) valor -> RINT . PARI expresion PARD
+
+    PARI            shift and go to state 140
+
+
+state 137
+
+    (36) valor -> expresion .
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    PARD            reduce using rule 36 (valor -> expresion .)
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    OR              shift and go to state 90
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+
+state 138
+
+    (63) expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion . PARD
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    PARD            shift and go to state 141
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    OR              shift and go to state 90
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+
+state 139
+
+    (34) printF -> RFMT PUNTO RPRINTF PARI CADENA COMA valor PARD .
+
+    PUNTOCOMA       reduce using rule 34 (printF -> RFMT PUNTO RPRINTF PARI CADENA COMA valor PARD .)
+
+
+state 140
+
+    (35) valor -> RINT PARI . expresion PARD
+    (44) expresion -> . expresion MAS expresion
+    (45) expresion -> . expresion MENOS expresion
+    (46) expresion -> . expresion POR expresion
+    (47) expresion -> . expresion DIV expresion
+    (48) expresion -> . expresion OR expresion
+    (49) expresion -> . expresion AND expresion
+    (50) expresion -> . expresion IGUALDAD expresion
+    (51) expresion -> . expresion DIFERENTE expresion
+    (52) expresion -> . expresion MAYOR expresion
+    (53) expresion -> . expresion MENOR expresion
+    (54) expresion -> . expresion MAYORI expresion
+    (55) expresion -> . expresion MENORI expresion
+    (56) expresion -> . expresion POT expresion
+    (57) expresion -> . expresion MOD expresion
+    (58) expresion -> . PARI expresion PARD
+    (59) expresion -> . ENTERO
+    (60) expresion -> . ID
+    (61) expresion -> . MENOS ENTERO
+    (62) expresion -> . DECIMAL
+    (63) expresion -> . RMATH PUNTO RMOD PARI expresion COMA expresion PARD
+
+    PARI            shift and go to state 73
+    ENTERO          shift and go to state 74
+    ID              shift and go to state 71
+    MENOS           shift and go to state 72
+    DECIMAL         shift and go to state 75
+    RMATH           shift and go to state 76
+
+    expresion                      shift and go to state 142
+
+state 141
+
+    (63) expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .
+
+    LLI             reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    MAS             reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    MENOS           reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    POR             reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    DIV             reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    OR              reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    AND             reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    IGUALDAD        reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    DIFERENTE       reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    MAYOR           reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    MENOR           reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    MAYORI          reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    MENORI          reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    POT             reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    MOD             reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    PUNTOCOMA       reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    CORD            reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    PARD            reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+    COMA            reduce using rule 63 (expresion -> RMATH PUNTO RMOD PARI expresion COMA expresion PARD .)
+
+
+state 142
+
+    (35) valor -> RINT PARI expresion . PARD
+    (44) expresion -> expresion . MAS expresion
+    (45) expresion -> expresion . MENOS expresion
+    (46) expresion -> expresion . POR expresion
+    (47) expresion -> expresion . DIV expresion
+    (48) expresion -> expresion . OR expresion
+    (49) expresion -> expresion . AND expresion
+    (50) expresion -> expresion . IGUALDAD expresion
+    (51) expresion -> expresion . DIFERENTE expresion
+    (52) expresion -> expresion . MAYOR expresion
+    (53) expresion -> expresion . MENOR expresion
+    (54) expresion -> expresion . MAYORI expresion
+    (55) expresion -> expresion . MENORI expresion
+    (56) expresion -> expresion . POT expresion
+    (57) expresion -> expresion . MOD expresion
+
+    PARD            shift and go to state 143
+    MAS             shift and go to state 86
+    MENOS           shift and go to state 87
+    POR             shift and go to state 88
+    DIV             shift and go to state 89
+    OR              shift and go to state 90
+    AND             shift and go to state 91
+    IGUALDAD        shift and go to state 92
+    DIFERENTE       shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    MAYORI          shift and go to state 96
+    MENORI          shift and go to state 97
+    POT             shift and go to state 98
+    MOD             shift and go to state 99
+
+
+state 143
+
+    (35) valor -> RINT PARI expresion PARD .
+
+    PARD            reduce using rule 35 (valor -> RINT PARI expresion PARD .)
+

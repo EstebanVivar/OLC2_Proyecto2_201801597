@@ -26,7 +26,10 @@ class Asignacion_Struct(Instruccion):
 
         generator.getStack(temp, tempPos)
 
-        struct = var.tipoStruct
+        if type(var.tipo) == str:
+            struct = var.tipo
+        else:                
+            struct = var.tipoStruct
         if struct != '':
             struct = entorno.obtenerStruct(struct)
             finalAtt = None

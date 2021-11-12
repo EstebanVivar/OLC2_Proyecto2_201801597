@@ -48,3 +48,33 @@ def compile(self, environment):
 
         #     generator.agregarGoto(etiquetaSalida)
         #     generator.agregarEtiqueta(etiquetaSalida)
+
+
+
+struct Persona
+    nombre::String;
+    edad::Int64;
+    numeroFamiliares::Int64;
+end;
+
+function RegistrarPersona(nombre::String, edad::Int64, numeroFamiliares::Int64)::Persona
+    return Persona(nombre, edad, numeroFamiliares);
+end;
+
+function AgregarFamiliar(persona::Persona)::Nothing
+    persona.numeroFamiliares = persona.numeroFamiliares + 1;
+end;
+
+function ImprimirDatosPersona(persona::Persona)::Nothing
+    print("Nombre: ");
+    println(persona.nombre);
+    print("Edad: ");
+    println(persona.edad);
+    print("Numero de familiares: ");
+    println(persona.numeroFamiliares);
+end;
+
+manuel = RegistrarPersona("Manuel", 22, 4);
+ImprimirDatosPersona(manuel);
+AgregarFamiliar(manuel);
+ImprimirDatosPersona(manuel);
