@@ -1,54 +1,81 @@
-import math
+from Abstract.Instruccion import *
+from Abstract.Retorno import *
+from TablaSimbolos.TablaSimbolos import *
 
-import locale
-from Objeto.Primitivo import Primitivo
-from Abstract.Objeto import TipoObjeto
-from enum import Enum
-from Abstract.NodoReporteArbol import NodoReporteArbol
-from Abstract.Expresion import Expresion
-from TablaSimbolos.Excepcion import Excepcion
-from TablaSimbolos.Tipo import TIPO, Nativa
+from TablaSimbolos.Tipo import *
+from TablaSimbolos.Generator import *
+from backend.Project.Abstract.Expresion import Expresion
 
 
-class Nativa_String(Expresion):
-    def __init__(self, funcion, expresion, conversion, fila, columna):        
+class Nativa_String(Instruccion):
+    def __init__(self, funcion, expresion, fila, columna):    
+        Instruccion.__init__(self, fila, columna)    
         self.funcion = funcion
         self.expresion = expresion
-        self.conversion = conversion
-        self.fila = fila
-        self.columna = columna
         
 
-    def compilar(self, tree, table):
-        
-        if self.expresion!=None:
-            dato = self.expresion.compilar(tree, table)
-            if(dato.tipo == TipoObjeto.ERROR):
-                Excepcion(TipoObjeto.ERROR, f"Operador desconocido: {self.funcion}",self.fila,self.columna);
-        
-        if self.conversion!=None:
-            dato_conversion = self.conversion
+    def compilar(self, entorno):
+        genAux = Generator()
+        generador = genAux.getInstance()
+        if (self.funcion==Nativa.UPPER):
             
-            if(dato_conversion == TipoObjeto.ERROR):
-                Excepcion(TipoObjeto.ERROR, f"Operador desconocido: {self.funcion}",self.fila,self.columna);  
+            generador.agregarComentario("upper begin")
+            exp = self.expresion.compilar(entorno)
+            generador.fUpper()
+            paramTemp = generador.agregarTemporal()
                 
-       
+            generador.agregarExpresion(paramTemp, 'P','+', entorno.tamano )
+            generador.agregarExpresion(paramTemp, paramTemp, '+', '1')
+            generador.setStack(paramTemp, exp.valor)
+            
+            generador.cambioEntorno(entorno.tamano)
+            generador.llamadaFuncion('upper')
+
+            temp = generador.agregarTemporal()
+            generador.getStack(temp, 'P')
+            generador.regresoEntorno(entorno.tamano)  
+            generador.agregarComentario("upper end")
+            return Retorno(temp, Tipo.CADENA, True) 
+        elif (self.funcion==Nativa.LOWER):
+            exp = self.expresion.compilar(entorno)
+            generador.agregarComentario("lower begin")
+            generador.fLower()
+            paramTemp = generador.agregarTemporal()
+                
+            generador.agregarExpresion(paramTemp, 'P','+', entorno.tamano )
+            generador.agregarExpresion(paramTemp, paramTemp, '+', '1')
+            generador.setStack(paramTemp, exp.valor)
+            
+            generador.cambioEntorno(entorno.tamano)
+            generador.llamadaFuncion('lower')
+
+            temp = generador.agregarTemporal()
+            generador.getStack(temp, 'P')
+            generador.regresoEntorno(entorno.tamano)  
+             
+            generador.agregarComentario("lenght end")
+            return Retorno(temp, Tipo.CADENA, True)
+        elif (self.funcion==Nativa.LENGTH):
+            exp = self.expresion.compilar(entorno)
+            generador.fLength()
+            paramTemp = generador.agregarTemporal()
+                
+            generador.agregarExpresion(paramTemp, 'P','+', entorno.tamano )
+            generador.agregarExpresion(paramTemp, paramTemp, '+', '1')
+            generador.setStack(paramTemp, exp.valor)
+            
+            generador.cambioEntorno(entorno.tamano)
+            generador.llamadaFuncion('length')
+
+            temp = generador.agregarTemporal()
+            generador.getStack(temp, 'P')
+            generador.regresoEntorno(entorno.tamano)  
+             
+            generador.agregarComentario("lenght end")
+            return Retorno(temp, Tipo.ENTERO, True)
+            
+           
         
-        if (self.funcion==Nativa.PARSE):
-            if(dato.tipo==TipoObjeto.CADENA):
-                if(dato_conversion==TipoObjeto.ENTERO):                
-                    return Primitivo(TipoObjeto.ENTERO, int(float(dato.getValue())));
-                elif(dato_conversion==TipoObjeto.DECIMAL):              
-                    return Primitivo(TipoObjeto.DECIMAL, float(dato.getValue()));
-        
-        return Excepcion(TipoObjeto.ERROR, f"Operador desconocido: {self.funcion}",self.fila,self.columna);
 
     
-    def obtenerNodo(self):
-        nodo = NodoReporteArbol("NATIVA_CONVERSION")
-        if self.conversion != None:
-            nodo.agregarHijo(str(self.funcion))
-            # nodo.agregarHijoNodo(self.conversion.obtenerNodo())       
-            nodo.agregarHijoNodo(self.expresion.obtenerNodo())
-        
-        return nodo
+    

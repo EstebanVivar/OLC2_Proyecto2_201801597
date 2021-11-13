@@ -34,6 +34,8 @@ from Expresiones.Array import Array
 from Instrucciones.AccesoArray import Acceso_Array
 from Instrucciones.Asignacion_Array import Asignacion_Array
 from Instrucciones.Asignacion_Struct import Asignacion_Struct
+from Expresiones.Nativa_String import Nativa_String
+from TablaSimbolos.Tipo import Nativa
 
 
 sys.setrecursionlimit(10000)
@@ -119,7 +121,7 @@ t_PUNTOCOMA = r';'
 t_P_IZQ = r'\('
 t_P_DER = r'\)'
 t_C_IZQ = r'\['
-t_C_DER= r']'
+t_C_DER = r']'
 t_L_IZQ = r'{'
 t_L_DER = r'}'
 t_COMA = r','
@@ -211,7 +213,9 @@ precedence = (
      'MENORIGUAL', 'DISTINTO', 'COMPARACION'),
     ('left', 'MAS', 'MENOS'),
     ('left', 'POR', 'DIVIDIDO'),
+    ('right', 'UMENOS'),
     ('left', 'POTENCIA'),
+    ('left', 'MODULO'),
 )
 
 
@@ -246,10 +250,25 @@ def p_INSTRUCCION(t):
                                 | instruccion_continue
                                 | instruccion_for
                                 | instruccion_struct
+                                | nativas
                                 '''
     t[0] = t[1]
 
 
+def p_NATIVAS(t):
+    '''nativas                  : RUPPER P_IZQ expresion P_DER 
+                                | RLOWER P_IZQ expresion P_DER
+                                | RLENGTH P_IZQ expresion P_DER
+                                '''
+    if t[1] == 'uppercase':
+        t[0] = Nativa_String(Nativa.UPPER, t[3],  t.lineno(
+            2), t.lexpos(2))
+    elif t[1] == 'lowercase':
+        t[0] = Nativa_String(Nativa.LOWER, t[3],  t.lineno(
+            2), t.lexpos(2))
+    elif t[1] == 'length':
+        t[0] = Nativa_String(Nativa.LENGTH, t[3],  t.lineno(
+            2), t.lexpos(2))
 # //////////////////////////////////////////IMPRIMIR///////////////////////////////////////////////////
 
 
@@ -317,8 +336,8 @@ def p_ASIGNACION(t):
     if len(t) == 4:
         t[0] = Asignacion(t[1], t[3], t.lineno(2), t.lexpos(2))
     else:
-        t[0] = Asignacion_Array(t[1], t[2],t[4], t.lineno(
-        1), t.lexpos(3))
+        t[0] = Asignacion_Array(t[1], t[2], t[4], t.lineno(
+            1), t.lexpos(3))
 
 # /////////////////////////////////////// WHILE //////////////////////////////////////////////////
 
@@ -380,13 +399,12 @@ def p_PARAMETROS(t):
 
 def p_PARAMETRO_TIPO(t):
     '''parametro                    : ID TIPO tipo_dato'''
-    t[0] = Parametro(t[1],t[3], t.lineno(1), t.lexpos(1))
+    t[0] = Parametro(t[1], t[3], t.lineno(1), t.lexpos(1))
+
 
 def p_PARAMETRO_TIPO_STRUCT(t):
     '''parametro                    : ID TIPO ID'''
-    t[0] = Parametro(t[1],t[3], t.lineno(1), t.lexpos(1))
-
-
+    t[0] = Parametro(t[1], t[3], t.lineno(1), t.lexpos(1))
 
 
 # /////////////////////////////////////// TIPO DATO ////////////////////////////////////////////////
@@ -445,7 +463,7 @@ def p_PARAMETROS_LLAMADA(t):
 
 def p_STRUCT(t):
     'instruccion_struct      : RSTRUCT ID atributos REND'
-    t[0] = Struct(t[2], t[3],t.lineno(1), t.lexpos(1))
+    t[0] = Struct(t[2], t[3], t.lineno(1), t.lexpos(1))
 
 
 def p_LISTA_PARAMETROS_STRUCT(t):
@@ -457,11 +475,13 @@ def p_LISTA_PARAMETROS_STRUCT(t):
     else:
         t[0] = [t[1]]
 
+
 def p_ASIGNACION_STRUCT(t):
     'instruccion_asignacion     : ID DOT ID IGUAL expresion'
     t[0] = Asignacion_Struct(t[1], t[3], t[5], t.lineno(
         1), t.lexpos(2))
 # ///////////////////////////////////////FOR//////////////////////////////////////////////////
+
 
 def p_INSTRUCCION_FOR(t):
     'instruccion_for       : RFOR ID RIN range instrucciones REND'
@@ -511,6 +531,12 @@ def p_EXPRESION_BINARIA(t):
     elif t[2] == '/':
         t[0] = Aritmetica(OperadorAritmetico.DIVISION, t[1],
                           t[3], t.lineno(2), t.lexpos(0))
+    elif t[2] == '%':
+        t[0] = Aritmetica(OperadorAritmetico.MODULO, t[1],
+                          t[3], t.lineno(2), t.lexpos(0))
+    elif t[2] == '^':
+        t[0] = Aritmetica(OperadorAritmetico.POTENCIA, t[1],
+                          t[3], t.lineno(2), t.lexpos(0))
     elif t[2] == '>':
         t[0] = Relacional(OperadorRelacional.MAYOR, t[1],
                           t[3], t.lineno(2), t.lexpos(0))
@@ -536,6 +562,12 @@ def p_EXPRESION_BINARIA(t):
         t[0] = Logica(OperadorLogico.OR, t[1], t[3], t.lineno(2),
                       t.lexpos(0))
 
+def p_EXPRESION_NEGATIVO(t):
+    'expresion                  : NEGACION expresion'
+    t[0] = Logica(OperadorLogico.NOT, t[2], None,
+                  t.lineno(2), t.lexpos(0))
+
+
 
 def p_EXPRESION_IDENTIFICADOR(t):
     'expresion                  : ID'
@@ -546,22 +578,26 @@ def p_EXPRESION_LLAMADA(t):
     'expresion                  : instruccion_llamada'
     t[0] = t[1]
 
+def p_EXPRESION_NATIVAS(t):
+    'expresion                  : nativas'
+    t[0] = t[1]
 
 def p_ACCESO_STRUCT(t):
     '''expresion                : expresion DOT ID
-                                | ID DOT ID'''   
+                                | ID DOT ID'''
     t[0] = AccesoStruct(t[1], t[3], t.lineno(1), t.lexpos(1))
 
-# def p_EXPRESION_MENOS(t):
-#     '''expresion                : MENOS expresion %prec UMENOS'''
-#     t[0] = Aritmetica(OperadorAritmetico.NEG, t[2], None,
-#                       t.lineno(2), t.lexpos(0))
+def p_ACCESO_STRUCT_ARRAY(t):
+    '''expresion                : expresion DOT ID acceso
+                                | ID DOT ID acceso'''
+    t[0] = AccesoStruct(t[1], t[3], t.lineno(1), t.lexpos(1),t[4])
+
+
 
 
 def p_EXPRESION_ACCESO_ARRAY(t):
     'expresion                  : ID accesos'
     t[0] = Acceso_Array(t[1], t[2], t.lineno(1), t.lexpos(0))
-    
 
 
 def p_EXPRESION_LISTA_ACCESOS(t):
@@ -580,7 +616,6 @@ def p_EXPRESION_ACCESO(t):
     t[0] = t[2]
 
 
-
 def p_EXPRESION_ENTERO(t):
     'expresion                  : ENTERO'
     t[0] = Constante(int(t[1]), Tipo.ENTERO, t.lineno(1), t.lexpos(0))
@@ -595,6 +630,9 @@ def p_EXPRESION_ARRAY(t):
     'expresion                  : C_IZQ parametros_print C_DER'
     t[0] = Array(t[2], t.lineno(1), t.lexpos(0))
 
+def p_EXPRESION_MENOS(t):
+    '''expresion                : MENOS expresion %prec UMENOS'''
+    t[0] = Aritmetica(OperadorAritmetico.MENOS,Constante(0, Tipo.ENTERO, t.lineno(1), t.lexpos(0)), t[2],  t.lineno(1), t.lexpos(0))
 
 def p_EXPRESION_DECIMAL(t):
     'expresion                  : DECIMAL'
@@ -622,10 +660,6 @@ def p_EXPRESION_FALSE(t):
     t[0] = Constante(False, Tipo.BOOLEANO, t.lineno(1), t.lexpos(0))
 
 
-# def p_EXPRESION_NEGATIVO(t):
-#     'expresion                  : NEGACION expresion'
-#     t[0] = Logica(OperadorLogico.NOT, None, t[2],
-#                   t.lineno(2), t.lexpos(0))
 
 
 parser = yacc.yacc()

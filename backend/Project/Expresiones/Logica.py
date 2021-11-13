@@ -33,16 +33,20 @@ class Logica(Expresion):
             etiquetaAux = self.OperacionIzq.etiquetaFalse = generator.nuevaEtiqueta()
             self.OperacionDer.etiquetaFalse = self.etiquetaFalse
         else:
-            print("NOT")
+            self.OperacionIzq.etiquetaTrue = self.etiquetaFalse
+            self.OperacionIzq.etiquetaFalse = self.etiquetaTrue 
+           
         left = self.OperacionIzq.compilar(entorno)
         if left.tipo != Tipo.BOOLEANO:
             print("No se puede utilizar en expresion booleana")
             return
-        generator.agregarEtiqueta(etiquetaAux)
-        right = self.OperacionDer.compilar(entorno)
-        if right.tipo != Tipo.BOOLEANO:
-            print("No se puede utilizar en expresion booleana")
-            return
+        if etiquetaAux != '':
+            generator.agregarEtiqueta(etiquetaAux)
+        if self.OperacionDer!=None:
+            right = self.OperacionDer.compilar(entorno)
+            if right.tipo != Tipo.BOOLEANO:
+                print("No se puede utilizar en expresion booleana")
+                return
         generator.agregarComentario("FINALIZO EXPRESION LOGICA")
         generator.agregarSaltoLinea()
         ret = Retorno(None, Tipo.BOOLEANO, False)

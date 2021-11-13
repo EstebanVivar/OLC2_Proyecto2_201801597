@@ -92,7 +92,7 @@ class Relacional(Expresion):
             self.etiquetaFalse = generator.nuevaEtiqueta()
 
     def getOp(self):
-       
+
         if self.operador == OperadorRelacional.MAYOR:
             return '>'
         elif self.operador == OperadorRelacional.MENOR:

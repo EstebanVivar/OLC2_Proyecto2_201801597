@@ -5,10 +5,11 @@ from Abstract.Retorno import Tipo
 
 class AccesoStruct(Expresion):
 
-    def __init__(self, identificador, atributo, fila, columna):
+    def __init__(self, identificador, atributo, fila, columna,array=''):
         Expresion.__init__(self, fila, columna)
         self.identificador = identificador
         self.atributo = atributo
+        self.array=array
     
     def compilar(self, entorno):
         genAux = Generator()

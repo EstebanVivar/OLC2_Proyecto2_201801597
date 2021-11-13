@@ -12,7 +12,7 @@ class TIPO(Enum):
 
 
 class Nativa(Enum):
-    LOG10 = 1
+    LENGTH = 1
     LOG = 2
     SIN = 3
     COS = 4

@@ -14,7 +14,7 @@ class Rango(Expresion):
         newGenerator = Generator()        
         generador = newGenerator.getInstance()
         retTemp = generador.agregarTemporal()
-        res_left = self.OperacionIzq.valor
+        res_left = self.OperacionIzq.compilar(entorno).valor
         
         if self.OperacionDer==None:     
             generador.agregarExpresion(retTemp, 'H', '', '')        
@@ -25,9 +25,9 @@ class Rango(Expresion):
             generador.nextHeap()
             return Retorno(retTemp, Tipo.CARACTER, True)
         
-        res_right = self.OperacionDer.valor
+        res_right = self.OperacionDer.compilar(entorno).valor
         generador.agregarExpresion(retTemp, 'H', '', '')
-        for i in range(res_left, res_right+1):
+        for i in range(int(res_left), int(res_right)+1):
             generador.setHeap('H', i)
             generador.nextHeap()
         generador.setHeap('H', '-1')

@@ -20,7 +20,8 @@ def welcome():
 C3D=''
 @app.route("/Editor", methods=["POST","GET"])
 def compilar():
-    if request.method == "POST":    
+    if request.method == "POST": 
+        global C3D   
         try:
             inpt = request.json['input']
 
@@ -52,23 +53,28 @@ def compilar():
     else:        
         return render_template('index.html')
 
-@app.route('/Reportes')
-def REPORTS():                
-        return render_template('index.html')
+# @app.route('/Mirilla')
+# def REPORTS():                
+#         return render_template('index.html')
 
-@app.route('/AST', methods=["POST","GET"])
-def AST():            
-    if request.method == "POST":    
-        return jsonify(auxGlobal[1])
+@app.route('/Optimizacion', methods=["POST","GET"])
+def Optimizacion():     
+    global C3D       
+    if request.method == "GET": 
+        res=Optimizar(C3D)
+        res.Mirilla()        
+        b=res.getReporte()
+        x=jsonify(b)
+        return {"optimize":b}
     else:        
         return render_template('index.html')
 
-@app.route('/TablaSimbolos', methods=["POST","GET"])
-def Symbols():            
-    if request.method == "POST":    
-        return jsonify(auxGlobal[2])
-    else:        
-        return render_template('index.html')
+# @app.route('/TablaSimbolos', methods=["POST","GET"])
+# def Symbols():            
+#     if request.method == "POST":    
+#         return jsonify(auxGlobal[2])
+#     else:        
+#         return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 // eslint-disable-next-line
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap';
@@ -7,18 +7,37 @@ const Optimize = () => {
     // eslint-disable-next-line
     const [optmizations, updateOptmizations] = useState([]);
 
-    // useEffect(() => {
-        // async function fetch() {
-        //     await axios
-        //         .post("https://quiet-springs-28392.herokuapp.com/Errors")
-        //         .then(response => {
-        //             if (response) {
-        //                 updateSimbols(response.data)
-        //             }
-        //         })
-        // }
-        // fetch()
-    // }, [])
+    useEffect(() => {
+        async function fetch() {
+            await axios
+                .get("http://localhost:5000/Optimizacion")
+                .then(response => {
+                    if (response) {
+                        
+                        let a=response.data.optimize
+                        for (let index = 0; index < a.length; index++) {
+                            if (a[index-1]!='"'){
+
+                            
+                            let vari=a[index].split(",")
+                            let vari2={
+                                "Tipo":"Mirilla",
+                                "Regla":vari[0],
+                                "Antes":vari[1],
+                                "Despues":vari[2],
+                                "Linea":vari[3]
+
+                            }
+                            updateOptmizations(optmizations=>[...optmizations,vari2])
+                        }
+                        }
+                        console.log(optmizations)
+                    }
+                })
+        }
+        console.log(optmizations)
+        fetch()
+    }, [])
 
     return (
         <div className="container " style={{width: 100 + "%", height: 88.2 + "vh" }}>
@@ -26,26 +45,27 @@ const Optimize = () => {
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Entorno</th>
-                        <th>Tipo</th>
-                        <th>Fila</th>
-                        <th>Columna</th>
+                        <th>Regla</th>
+                        <th>Antes</th>
+                        <th>Despues</th>
+                        <th>Linea</th>
                     </tr>
                 </thead>
-                <tbody>                   
-                    {optmizations.map(item => {
-                        return (
-                            <tr key={item.id}>
-
-                                <td>{item.id}</td>
-                                <td>{item.ambito}</td>
-                                <td>{item.tipo}</td>
-                                <td>{item.fila}</td>
-                                <td>{item.columna}</td>
-                            </tr>
-                        );
-                    })}
+                <tbody>
+                    {
+                        optmizations ? optmizations.map(item => {
+                            return (
+                                <tr key={item}>
+    
+                                    <td>{item.Regla}</td>
+                                    <td>{item.Antes}</td>
+                                    <td>{item.Despues}</td>
+                                    <td>{item.Linea}</td>
+                                </tr>
+                            );
+                        }): null
+                    }
+                   
                 </tbody>
             </Table>
         </div>
